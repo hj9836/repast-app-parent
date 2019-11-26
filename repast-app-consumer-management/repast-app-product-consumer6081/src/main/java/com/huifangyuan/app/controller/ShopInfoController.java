@@ -45,6 +45,7 @@ public class ShopInfoController extends BaseController {
     }
 
     /**
+     * @Author 闫增健
      * 通过店铺 关键字搜素商品列表
      * @param productVo
      * @return
@@ -60,6 +61,7 @@ public class ShopInfoController extends BaseController {
         }
     }
     /**
+     * @Author 闫增健
      * 进入积分商城，查询所有积分商品列表
      */
     @GetMapping("/selectIntegralProduct")
