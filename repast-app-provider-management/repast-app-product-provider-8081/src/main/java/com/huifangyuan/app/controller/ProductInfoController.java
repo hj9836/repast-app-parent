@@ -24,7 +24,7 @@ import java.util.List;
 public class ProductInfoController {
 
     @Autowired
-    ProductInfoService productInfoService;
+    private ProductInfoService productInfoService;
     @Autowired
     private ProductCatService productCatService;
     /**
@@ -38,9 +38,8 @@ public class ProductInfoController {
      **/
     @GetMapping("/getCatByShopId")
     public List<ProductCat> getCategoryByShopId(@RequestParam("shopId") Long shopId) {
-        ProductCat productCat = new ProductCat().setShopId(shopId);
         try {
-            List<ProductCat> catList = productCatService.selectDomain(productCat);
+            List<ProductCat> catList = productCatService.selectProductByshopid(shopId);
             if(catList.size() > 0) {
                 return catList;
             }

@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
+import java.util.List;
+
 @Service
 public class ProductCatService extends BaseService<ProductCat> {
 
@@ -19,6 +21,14 @@ public class ProductCatService extends BaseService<ProductCat> {
         通用mapper方法
      **/
     public Mapper<ProductCat> getMapper() {
+        return productCatMapper;
+    }
+
+    public List<ProductCat> selectProductByshopid(Long shopId){
+        List<ProductCat> productCats = productCatMapper.selectProductByshopId(shopId);
+        if ((productCats.size()>0)){
+            return productCats;
+        }
         return null;
     }
 
