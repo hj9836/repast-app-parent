@@ -87,6 +87,17 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 System.out.println("首页的搜索，熔断数据");
                 return null;
             }
+
+            @Override
+            public boolean insertAllProductToRedis() {
+
+                return false;
+            }
+
+            @Override
+            public List<MemberProduct> test(Long ShopId) {
+                return null;
+            }
         };
         return repastService;
     }

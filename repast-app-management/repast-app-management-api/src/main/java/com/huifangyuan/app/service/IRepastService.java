@@ -122,7 +122,26 @@ public interface IRepastService {
      */
     @GetMapping("/homeSeekProduct")
     List<Product> homeSeekProduct(@RequestParam("keywords") String keywords);
+    /*---------------------------------------------闫增健-------------------------------------------------------------*/
 
+
+
+
+    /*---------------------------------------------老杨redis-------------------------------------------------------------*/
+
+    @PostMapping("/insertAllProductToRedis")
+    boolean insertAllProductToRedis();
+
+
+
+
+    @GetMapping("/test")
+    List<MemberProduct> test(@RequestParam("ShopId") Long ShopId);
+
+
+
+
+    /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 
 
 

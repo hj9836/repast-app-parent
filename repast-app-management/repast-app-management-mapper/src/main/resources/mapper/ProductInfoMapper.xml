@@ -60,9 +60,19 @@
     </select>
 
     <select id="selectProductByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.MemberProduct">
-      	SELECT p.name,p.id Id,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
+      	SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
       	LEFT JOIN pms_member_price m ON p.id=m.product_id where p.shop_id=#{shopId}
     </select>
 
+    <select id="selectAllProductInfo" resultType="com.huifangyuan.app.vo.MemberProduct">
+      	SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
+      	LEFT JOIN pms_member_price m ON p.id=m.product_id
+    </select>
 
+
+
+    <select id="selectProductIdByShopId" parameterType="java.lang.Long" resultType="java.lang.Long">
+      	SELECT p.id Id from pms_product p
+      	LEFT JOIN pms_member_price m ON p.id=m.product_id where p.shop_id=#{ShopId}
+    </select>
 </mapper>

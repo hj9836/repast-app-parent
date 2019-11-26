@@ -74,6 +74,15 @@ public class ProductInfoService extends BaseService<Product> {
     }
 
 
+    public List<MemberProduct> test(Long ShopId,RedisService redisService,MyRedisService myRedisService){
+
+        List<Long> productId_list = productInfoMapper.selectProductIdByShopId(ShopId);
+
+        List<MemberProduct> productListByPrimayKeyFromRedis = myRedisService.getProductListByPrimayKeyFromRedis(productId_list, redisService);
+
+
+        return productListByPrimayKeyFromRedis;
+    }
 
 
 

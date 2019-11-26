@@ -32,5 +32,13 @@ public interface ProductInfoMapper extends Mapper<Product> {
     List<MemberProduct> selectProductByShopId(Long shopId);
 
 
+    List<Long>selectProductIdByShopId(Long ShopId);
+
+
+    List<MemberProduct> selectAllProductInfo();
+
+
+
+
 
 }
