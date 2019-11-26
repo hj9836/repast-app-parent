@@ -6,17 +6,27 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Accessors(chain = true)
 public class MemberProduct implements Serializable {
-   private long Id;
-   private String name;
-   private double price;
-   private double promotionPrice;
-   private int promotionType;
-   private double memberPrice;
+    private Long shopId;
+    private Long productId;
+    private Long memberLevelId;
+    private BigDecimal memberPrice;
+    private String memberLevelName;
+    private Long productCategoryId;
+    private Integer deleteStatus;
+    private Integer publishStatus;
+    private Integer newStatus;
+    private Integer recommandStatus;
+    private Integer sale;
+    private Integer stock;
+    private Integer promotionType;
+    private Byte currency;
+    private String description;
 
 }

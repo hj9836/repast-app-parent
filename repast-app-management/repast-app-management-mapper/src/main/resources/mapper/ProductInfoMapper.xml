@@ -47,29 +47,22 @@
         <result column="detail_html" property="detailHtml" jdbcType="LONGVARCHAR"/>
         <result column="detail_mobile_html" property="detailMobileHtml" jdbcType="LONGVARCHAR"/>
     </resultMap>
+    <select id="getProductByShopId" resultType="com.huifangyuan.app.domain.Product">
+    select pp.* from pms_product pp
+     inner join pms_sku_stock pss on pp.id = pss.product_id
+    where pp.delete_status = 0 and pp.publish_status = 1 and pss.stock > 0 and pp.shop_id = #{shopId}
+    </select>
+    <select id="getProductByCategoryId" resultType="com.huifangyuan.app.domain.Product">
 
+    select pp.* from pms_product pp left join pms_product_category ppc on pp.product_category_id = ppc.parent_id
+        where pp.delete_status = 0 and pp.publish_status = 1
+        and pp.stock > 0 and pp.currency=0 and pp.product_category_id = #{productCategoryId} ORDER BY sale desc
+    </select>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <select id="selectProductByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.MemberProduct">
+      	SELECT p.name,p.id Id,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
+      	LEFT JOIN pms_member_price m ON p.id=m.product_id
+    </select>
 
 
 </mapper>
