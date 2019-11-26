@@ -30,4 +30,10 @@
   </select>
 
 
+  <select id="getAllLevelIsZero" resultMap="BaseResultMap">
+
+	SELECT * from pms_product_category WHERE `level`=0;
+  </select>
+
+
 </mapper>

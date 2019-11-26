@@ -169,6 +169,8 @@ public interface IRepastService {
     @GetMapping("/selectProductCatToRedis")
     List<ProductCat> selectProductCatToRedis(@RequestParam("shopId") Long shopId);
 
+    @GetMapping("/insertZeroCatToRedis")
+    boolean insertZeroCatToRedis();
 
 
 
