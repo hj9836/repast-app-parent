@@ -1,6 +1,7 @@
 package com.huifangyuan.app.fallback;
 
 
+import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
@@ -72,6 +73,18 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             @Override
             public List<Product> selectIntegralProduct() {
                 System.out.println("测试进入积分商城，查询所有积分商品列表，熔断数据");
+                return null;
+            }
+
+            @Override
+            public List<Comment> getShopCommentById(Long shopId) {
+                System.out.println("根据店铺id获取店铺所有评价，熔断数据");
+                return null;
+            }
+
+            @Override
+            public List<Product> homeSeekProduct(String keywords) {
+                System.out.println("首页的搜索，熔断数据");
                 return null;
             }
         };

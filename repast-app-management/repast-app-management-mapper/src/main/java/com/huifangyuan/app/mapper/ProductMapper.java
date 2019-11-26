@@ -10,4 +10,5 @@ public interface ProductMapper extends Mapper<Product> {
     List<Product> getProductByShopId(Long shopId);
     List<Product> selectShopProduct(ProductVo productVo);
     List<Product> getIntegralProduct();
+
 }

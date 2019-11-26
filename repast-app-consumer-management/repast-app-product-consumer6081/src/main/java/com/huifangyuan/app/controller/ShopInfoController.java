@@ -2,6 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
+import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
@@ -74,6 +75,21 @@ public class ShopInfoController extends BaseController {
         return failed();
     }
 
+    /**
+     * 通过商家店铺id查询店铺评价
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopCommentById")
+    @ApiOperation(value = "查询店铺评价" , notes = "通过主键查询商家全部评价" )
+    public ResultData getShopCommentById(Long shopId){
+        List<Comment> shopCommentById = repastService.getShopCommentById(shopId);
+        if (null != shopCommentById){
+            return success(shopCommentById);
+        }else {
+            return failed();
+        }
+    }
 
 
 }

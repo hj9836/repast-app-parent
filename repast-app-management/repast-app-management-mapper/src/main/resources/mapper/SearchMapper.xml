@@ -3,9 +3,9 @@
 <mapper namespace="com.huifangyuan.app.mapper.SearchMapper">
 
 
-
-
-
-
-
+    <select id="HomeSeekProduct" resultType="com.huifangyuan.app.domain.Product" parameterType="String">
+        SELECT * from pms_product WHERE delete_status = 0 AND publish_status = 1 AND stock > 0
+        AND name LIKE  '%'||#{keywords}||'%' OR keywords LIKE '%'||#{keywords}||'%'
+        OR product_category_name LIKE '%'||#{keywords}||'%'
+    </select>
 </mapper>
