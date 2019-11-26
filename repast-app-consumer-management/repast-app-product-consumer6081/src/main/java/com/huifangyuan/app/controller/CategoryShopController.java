@@ -28,6 +28,7 @@ public class CategoryShopController extends BaseController {
 
 
     /**
+     * @Author 闫增健
      * 根据类目名称 查询店铺信息
      * @param parentId
      * @return
