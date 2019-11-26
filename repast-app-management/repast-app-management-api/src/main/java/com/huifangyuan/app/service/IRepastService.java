@@ -138,6 +138,8 @@ public interface IRepastService {
     @GetMapping("/test")
     List<MemberProduct> test(@RequestParam("ShopId") Long ShopId);
 
+    @GetMapping("/insertZeroCatToRedis")
+    boolean insertZeroCatToRedis();
 
 
 

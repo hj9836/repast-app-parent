@@ -11,5 +11,6 @@ public class StaticProperties {
     public static final String OK = "OK";
     public static final String REDIS_KEY = "member";
     public static final String REDIS_PRODUCT_KEY="product";
+    public static final String REDIS_LEVEL0CAT_KEY="ZeroCat";
 
 }

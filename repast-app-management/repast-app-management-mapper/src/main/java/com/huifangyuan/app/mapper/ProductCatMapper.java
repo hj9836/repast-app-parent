@@ -13,4 +13,6 @@ public interface ProductCatMapper extends Mapper<ProductCat> {
      * 根据店铺id获取商品类目信息
      */
     List<ProductCat> selectProductByshopId(Long shopId);
+
+    List<ProductCat> getAllLevelIsZero();
 }

@@ -79,7 +79,7 @@ public class ProductInfoService extends BaseService<Product> {
         List<Long> productId_list = productInfoMapper.selectProductIdByShopId(ShopId);
         //然后调用我这个方法——>getProductListByPrimayKeyFromRedis 把查询到的List<Long>传入即可
         List<MemberProduct> productListByPrimayKeyFromRedis = myRedisService.getProductListByPrimayKeyFromRedis(productId_list, redisService);
-        if (null!=productListByPrimayKeyFromRedis || 0==productListByPrimayKeyFromRedis.size()){
+        if (null==productListByPrimayKeyFromRedis || 0==productListByPrimayKeyFromRedis.size()){
             //如果redis挂了，或者查询到的值为空，则执行原来所写的代码即可
             List<MemberProduct> productListByPrimayKeyFromMysql = productInfoMapper.selectProductByShopId(ShopId);
             return productListByPrimayKeyFromMysql;

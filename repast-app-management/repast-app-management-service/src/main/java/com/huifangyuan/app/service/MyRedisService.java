@@ -1,5 +1,7 @@
 package com.huifangyuan.app.service;
 
+import com.huifangyuan.app.domain.ProductCat;
+import com.huifangyuan.app.mapper.ProductCatMapper;
 import com.huifangyuan.app.mapper.ProductInfoMapper;
 import com.huifangyuan.app.utils.JSONUtil;
 import com.huifangyuan.app.vo.MemberProduct;
@@ -10,6 +12,7 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_LEVEL0CAT_KEY;
 import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_PRODUCT_KEY;
 
 
@@ -17,7 +20,10 @@ import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_PRODUCT_KE
 public class MyRedisService {
 
     @Autowired
-    ProductInfoMapper productInfoMapper;
+    private ProductInfoMapper productInfoMapper;
+
+    @Autowired
+    private ProductCatMapper productCatMapper;
 
 
 
@@ -102,7 +108,17 @@ public class MyRedisService {
 
 
 
+    public boolean insertZeroCatToRedis(RedisService redisService, MyRedisService myRedisService){
+        //查询所有level=0的类目信息
+        List<ProductCat> productCats = productCatMapper.getAllLevelIsZero();
+        //存入redis
+        String status = redisService.set(REDIS_LEVEL0CAT_KEY, JSONUtil.toJsonString(productCats));
+        if ("OK".equals(status.toUpperCase())){
+            return true;
+        }
 
+        return false;
+    }
 
 
 

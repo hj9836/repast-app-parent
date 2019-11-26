@@ -98,6 +98,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             public List<MemberProduct> test(Long ShopId) {
                 return null;
             }
+
+            @Override
+            public boolean insertZeroCatToRedis() {
+                System.out.println("进入ZeroCat存入Redis方法熔断");
+                return false;
+            }
         };
         return repastService;
     }

@@ -51,5 +51,18 @@ public class RedisController extends BaseController {
     }
 
 
+    @GetMapping("/insertZeroCatToRedis")
+    @ApiOperation(value = "把0级分类存入redis",notes = "把level=0的分类存入redis中，key值为Zerocat")
+    public ResultData insertZeroCatToRedis(/*@RequestParam("shopId") Long ShopId*/){
+
+
+        if (false!=repastService.insertZeroCatToRedis()){
+
+            return success(repastService.insertZeroCatToRedis());
+        }
+        return failed();
+    }
+
+
 
 }

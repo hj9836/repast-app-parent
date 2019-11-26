@@ -22,13 +22,13 @@ import java.util.List;
 public class RedisController {
 
     @Autowired
-    MyRedisService myRedisService;
+    private MyRedisService myRedisService;
 
     @Autowired
-    RedisService redisService;
+    private RedisService redisService;
 
     @Autowired
-    ProductInfoService productInfoService;
+    private ProductInfoService productInfoService;
 
     @PostMapping ("/insertAllProductToRedis")
     public boolean insertAllProductToRedis(){
@@ -44,5 +44,11 @@ public class RedisController {
         return productInfoService.test(ShopId,redisService,myRedisService);
     }
 
+    @GetMapping ("/insertZeroCatToRedis")
+    public boolean insertZeroCatToRedis(){
+
+
+        return myRedisService.insertZeroCatToRedis(redisService,myRedisService);
+    }
 
 }
