@@ -107,11 +107,13 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public boolean insertAllProductCatToRedis() {
+                System.out.println("查询所有商品类目信息 存入redis");
                 return false;
             }
 
             @Override
-            public List<ProductCat> selectProductCatToRedis(Long shopId) {
+            public List<ProductCat> selectProductCatByshopIdToRedis(Long shopId) {
+                System.out.println("根据店铺id查询商品类目信息从redis中");
                 return null;
             }
 

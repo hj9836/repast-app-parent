@@ -1,8 +1,7 @@
 package com.huifangyuan.app.controller;
 
-import com.huifangyuan.app.service.MyRedisService;
-import com.huifangyuan.app.service.ProductInfoService;
-import com.huifangyuan.app.service.RedisService;
+import com.huifangyuan.app.domain.ProductCat;
+import com.huifangyuan.app.service.*;
 import com.huifangyuan.app.vo.MemberProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,6 +19,11 @@ import java.util.List;
  **/
 @RestController
 public class RedisController {
+    @Autowired
+    private ShopmenuRedisService shopmenuRedisService;
+
+    @Autowired
+    private ProductCatService productCatService;
 
     @Autowired
     MyRedisService myRedisService;
@@ -32,16 +36,40 @@ public class RedisController {
 
     @PostMapping ("/insertAllProductToRedis")
     public boolean insertAllProductToRedis(){
-
-
         return myRedisService.insertAllProductToRedis(redisService);
     }
 
     @GetMapping ("/test")
     public List<MemberProduct> test(@RequestParam(value = "ShopId") Long ShopId){
 
-
         return productInfoService.test(ShopId,redisService,myRedisService);
+    }
+    /**
+     *@ClassName RedisController
+     *@Description
+     * 根据店铺id获取所有商品类目信息 存入redis
+     *@Date 23:23 2019/11/26
+     *@author eric
+     *@Param
+     *@Return
+     **/
+    @PostMapping ("/insertAllProductCatToRedis")
+    public boolean insertAllProductCatToRedis(){
+        return myRedisService.insertAllProductToRedis(redisService);
+    }
+    /**
+     *@ClassName RedisController
+     *@Description
+     * 根据店铺id获取所有商品类目信息 从redis中
+     *@Date 23:23 2019/11/26
+     *@author eric
+     *@Param
+     *@Return
+     **/
+    @GetMapping ("/selectProductByshopIdToRedis")
+    public List<ProductCat> selectProductCatByshopIdToRedis(@RequestParam(value = "shopId") Long shopId){
+
+        return productCatService.selectProductCatByshopIdToRedis(shopId,redisService,shopmenuRedisService);
     }
 
 
