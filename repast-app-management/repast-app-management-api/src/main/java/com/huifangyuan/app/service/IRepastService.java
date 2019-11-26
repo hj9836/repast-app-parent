@@ -4,7 +4,9 @@ package com.huifangyuan.app.service;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
+import com.huifangyuan.app.vo.CategoryShop;
 import com.huifangyuan.app.vo.MemberProduct;
+import com.huifangyuan.app.vo.ProductVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -49,6 +51,8 @@ public interface IRepastService {
 
 
 
+
+
     /*-------------------------------------shopController-----------------------------------------------------*/
     /*------------------------------------------------------------------------------------------------------------*/
     /*-------------------------------------productController-----------------------------------------------------*/
@@ -95,7 +99,26 @@ public interface IRepastService {
     /*-------------------------------------searchController-----------------------------------------------------*/
 
 
-
+    /*---------------------------------------------闫增健-------------------------------------------------------------*/
+    /**
+     * 根据类目名称 查询店铺列表
+     * @param parentId
+     * @return
+     */
+    @GetMapping("/getCategoryShop")
+    List<CategoryShop> getCategoryShop(@RequestParam("parentId") Long parentId);
+    /**
+     * 通过店铺 关键字搜素商品列表
+     * @param productVo
+     * @return
+     */
+    @PostMapping("/selectShopProduct")
+    List<Product> selectShopProduct(@RequestBody ProductVo productVo);
+    /**
+     * 进入积分商城，查询所有积分商品列表
+     */
+    @GetMapping("/selectIntegralProduct")
+    List<Product> selectIntegralProduct();
 
 
 
