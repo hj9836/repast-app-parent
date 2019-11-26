@@ -35,6 +35,42 @@ public interface IRepastService {
     ShopInfoVo getShopInfoByPrimaryKey(@RequestParam("ShopId") Long ShopId);
 
 
+    /**
+     *
+     * @description
+     *      通过店铺主键查询商品类目列表
+     * @param [shopId]
+     * @date 2019/11/21
+     * @return com.aaa.lee.app.base.ResultData
+     * @throws
+     **/
+    @GetMapping("/getCatByShopId")
+    List<ProductCat> getCategoryByShopId(@RequestParam("shopId") Long shopId);
+
+    /**
+     *
+     * @description
+     *      通过店铺主键查询商品列表
+     * @param [shopId]
+     * @date 2019/11/21
+     * @return java.util.List<com.aaa.lee.app.domain.Product>
+     * @throws
+     **/
+    @GetMapping("/getProductByShopId")
+    List<Product> getProductByShopId(Long shopId);
+    /**
+     *@ClassName IRepastService
+     *@Description
+     * 根据商品类目信息查询商品信息
+     *@Date 10:28 2019/11/26
+     *@author eric
+     *@Param
+     *@Return
+     **/
+    @GetMapping("/getProductByProductCategoryId")
+    List<Product> getProductByProductCategoryId(@RequestParam("productCategoryId") Long productCategoryId);
+
+
 
 
 
