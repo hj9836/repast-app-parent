@@ -1,6 +1,7 @@
 package com.huifangyuan.app.service;
 
 
+import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
@@ -81,68 +82,6 @@ public interface IRepastService {
     @GetMapping("/selectAllMemberProduct")
     List<MemberProduct> selectAllProduct(@RequestParam("shopId") Long shopId);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*-------------------------------------shopController-----------------------------------------------------*/
-    /*------------------------------------------------------------------------------------------------------------*/
-    /*-------------------------------------productController-----------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*-------------------------------------productController-----------------------------------------------------*/
-    /*------------------------------------------------------------------------------------------------------------*/
-    /*-------------------------------------searchController-----------------------------------------------------*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /*-------------------------------------searchController-----------------------------------------------------*/
 
 
@@ -168,6 +107,21 @@ public interface IRepastService {
     List<Product> selectIntegralProduct();
 
 
+    /**
+     * 通过商家店铺id查询店铺评价
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopCommentById")
+    List<Comment> getShopCommentById(@RequestParam("shopId") Long shopId);
+
+    /**
+     * 根据商品name或keywords或product_category_name进行对全部商品的模糊搜索
+     * @param keywords
+     * @return
+     */
+    @GetMapping("/homeSeekProduct")
+    List<Product> homeSeekProduct(@RequestParam("keywords") String keywords);
 
 
 

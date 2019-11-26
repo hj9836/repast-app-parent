@@ -1,7 +1,9 @@
 package com.huifangyuan.app.controller;
 
+import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.service.ProductService;
+import com.huifangyuan.app.service.ShopCommentService;
 import com.huifangyuan.app.service.ShopInfoService;
 import com.huifangyuan.app.vo.ProductVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
@@ -23,6 +25,11 @@ public class ShopInfoController {
     ShopInfoService shopInfoService;
     @Autowired
     private ProductService productService;
+
+    @Autowired
+    private ShopCommentService shopCommentService;
+
+
     @GetMapping("/getShopInfoByPrimaryKey")
     public ShopInfoVo getShopInfoByPrimaryKey(@RequestParam(value = "ShopId") Long ShopId){
 
@@ -48,6 +55,26 @@ public class ShopInfoController {
     public List<Product> selectIntegralProduct(){
         return productService.getIntegralProduct();
     }
+
+    /**
+     * 通过店铺id查询出店铺评价
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopCommentById")
+    public List<Comment> getShopCommentById(@RequestParam("shopId") Long shopId){
+        Comment comment = new Comment().setShopId(shopId);
+        try {
+            List<Comment> comments = shopCommentService.selectDomain(comment);
+            if (comments.size() > 0){
+                    return comments;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    };
+
 
 
 }
