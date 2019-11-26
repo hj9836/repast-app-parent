@@ -16,24 +16,9 @@
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    <select id="selectProductByshopId" resultType="com.huifangyuan.app.domain.ProductCat">
+      select * from pms_product_category where shop_id=#{shopId}
+    </select>
 
 
 </mapper>
