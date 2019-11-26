@@ -19,6 +19,15 @@
     <select id="selectProductByshopId" resultType="com.huifangyuan.app.domain.ProductCat">
       select * from pms_product_category where shop_id=#{shopId}
     </select>
+  <select id="selectProductCatByShopId" resultType="java.lang.Long">
+    select p.parent_id from pms_product_category p where shop_id=#{shopId}
+  </select>
+  <select id="selectAllProductCat" resultType="com.huifangyuan.app.domain.ProductCat">
+    select * from pms_product_category
+  </select>
+  <select id="getCateByLevel" resultType="com.huifangyuan.app.domain.ProductCat">
+    SELECT name from pms_product_category where level=0
+  </select>
 
 
 </mapper>

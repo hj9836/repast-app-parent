@@ -74,7 +74,7 @@ public class ProductInfoService extends BaseService<Product> {
     }
 
 
-    public List<MemberProduct> test(Long ShopId,RedisService redisService,MyRedisService myRedisService){
+    public List<MemberProduct>  test(Long ShopId,RedisService redisService,MyRedisService myRedisService){
         //原来的方法返回的是List<MemberProduct>,现在改为List<Long>
         List<Long> productId_list = productInfoMapper.selectProductIdByShopId(ShopId);
         //然后调用我这个方法——>getProductListByPrimayKeyFromRedis 把查询到的List<Long>传入即可

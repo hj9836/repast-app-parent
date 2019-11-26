@@ -35,6 +35,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
+            public List<ProductCat> getCateByLevel() {
+                System.out.println("通过层级查询商品类型");
+                return null;
+            }
+
+            @Override
             public List<ProductCat> getCategoryByShopId(Long shopId) {
                 System.out.println("根据商品类目信息获取商品信息熔断数据");
                 return null;
@@ -96,6 +102,18 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public List<MemberProduct> test(Long ShopId) {
+                return null;
+            }
+
+            @Override
+            public boolean insertAllProductCatToRedis() {
+                System.out.println("查询所有商品类目信息 存入redis 测试熔断方法");
+                return false;
+            }
+
+            @Override
+            public List<ProductCat> selectProductCatToRedis(Long shopId) {
+                System.out.println("从redis中根据商铺id获取商品类目信息测试熔断数据");
                 return null;
             }
         };

@@ -2,6 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
+import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,6 +11,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 /**
  * @Company AAA软件教育
@@ -50,6 +53,23 @@ public class RedisController extends BaseController {
         return failed();
     }
 
+    @PostMapping("/insertAllProductCatToRedis")
+    @ApiOperation(value = "将全部商品类目存入redis",notes = "key为静态常量+shop_id，value为该商品类目的全部数据")
+    public ResultData insertAllProductCatToRedis(){
+        if (true==repastService.insertAllProductCatToRedis()){
+            return success();
+        }
+        return failed();
+    }
+    @GetMapping("/selectProductCatToRedis")
+    @ApiOperation(value = "商品类目",notes = "根据店铺id获取所有的商品类目信息")
+    public ResultData selectProductCatToRedis(Long shopId){
+        List<ProductCat> productCatList = repastService.selectProductCatToRedis(shopId);
+        if (null !=productCatList && productCatList.size()>0){
+            return success(productCatList);
+        }
+        return failed();
+    }
 
 
 }

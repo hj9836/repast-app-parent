@@ -35,6 +35,14 @@ public interface IRepastService {
     @GetMapping("/getShopInfoByPrimaryKey")
     ShopInfoVo getShopInfoByPrimaryKey(@RequestParam("ShopId") Long ShopId);
 
+    /**
+     * 通过层级查询商品类型
+     * @param level
+     * @return
+     */
+    @GetMapping("/getByLevel")
+    List<ProductCat> getCateByLevel();
+
 
     /**
      *
@@ -137,6 +145,29 @@ public interface IRepastService {
 
     @GetMapping("/test")
     List<MemberProduct> test(@RequestParam("ShopId") Long ShopId);
+    /**
+     *@ClassName IRepastService
+     *@Description
+     * 查询所有商品类目信息 存入redis
+     *@Date 21:17 2019/11/26
+     *@author eric
+     *@Param
+     *@Return
+     **/
+    @PostMapping ("/insertAllProductCatToRedis")
+    boolean insertAllProductCatToRedis();
+
+    /**
+     *@ClassName RedisController
+     *@Description
+     *@Date 21:03 2019/11/26
+     *@author eric
+     * 根据店铺id查询商品类目信息从redis中
+     *@Param
+     *@Return
+     **/
+    @GetMapping("/selectProductCatToRedis")
+    List<ProductCat> selectProductCatToRedis(@RequestParam("shopId") Long shopId);
 
 
 
