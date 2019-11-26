@@ -104,6 +104,21 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             public List<MemberProduct> test(Long ShopId) {
                 return null;
             }
+
+            @Override
+            public boolean insertAllProductCatToRedis() {
+                return false;
+            }
+
+            @Override
+            public List<ProductCat> selectProductCatToRedis(Long shopId) {
+                return null;
+            }
+
+            @Override
+            public boolean insertZeroCatToRedis() {
+                return false;
+            }
         };
         return repastService;
     }

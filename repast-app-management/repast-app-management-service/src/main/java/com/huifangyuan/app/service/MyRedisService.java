@@ -12,8 +12,7 @@ import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_LEVEL0CAT_KEY;
-import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_PRODUCT_KEY;
+import static com.huifangyuan.app.staticstatus.StaticProperties.*;
 
 
 @Service
