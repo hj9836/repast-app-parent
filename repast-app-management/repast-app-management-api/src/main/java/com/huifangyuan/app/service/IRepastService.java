@@ -69,6 +69,17 @@ public interface IRepastService {
      **/
     @GetMapping("/getProductByProductCategoryId")
     List<Product> getProductByProductCategoryId(@RequestParam("productCategoryId") Long productCategoryId);
+    /*@ClassName ProductService
+     *@Description
+     *@Date 16:47 2019/11/23
+     *@author eric
+     *      根据商铺id获取所有商品信息 并判断促销类型 展示对应促销类型价格
+     *@Param
+     *@Return
+     **/
+
+    @GetMapping("/selectAllMemberProduct")
+    List<MemberProduct> selectAllProduct(@RequestParam("shopId") Long shopId);
 
 
 
