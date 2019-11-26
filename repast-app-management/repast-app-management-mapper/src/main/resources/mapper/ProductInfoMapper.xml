@@ -61,7 +61,7 @@
 
     <select id="selectProductByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.MemberProduct">
       	SELECT p.name,p.id Id,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
-      	LEFT JOIN pms_member_price m ON p.id=m.product_id
+      	LEFT JOIN pms_member_price m ON p.id=m.product_id where p.shop_id=#{shopId}
     </select>
 
 
