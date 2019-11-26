@@ -52,6 +52,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
+            public List<MemberProduct> selectAllProduct(Long shopId) {
+                System.out.println("测试获取商品熔断数据");
+                return null;
+            }
+
+            @Override
             public List<CategoryShop> getCategoryShop(Long parentId) {
                 System.out.println("测试根据商品类目查询店铺信息，熔断数据");
                 return null;
