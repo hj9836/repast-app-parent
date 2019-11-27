@@ -72,5 +72,23 @@ public class RedisController {
         return productCatService.selectProductCatByshopIdToRedis(shopId,redisService,shopmenuRedisService);
     }
 
+    @GetMapping ("/insertZeroCatToRedis")
+    public boolean insertZeroCatToRedis(){
 
+
+        return productInfoService.insertZeroCatToRedis(redisService,myRedisService);
+    }
+
+    @GetMapping("/getZeroCat")
+    public List<ProductCat> getZeroCat(RedisService redisService){
+
+        return productCatService.getZeroCat(redisService);
+    }
+
+    @PostMapping ("/insertAllShopInfoToRedis")
+    public boolean insertAllShopInfoToRedis(){
+
+
+        return myRedisService.insertAllShopInfoToRedis(redisService);
+    }
 }

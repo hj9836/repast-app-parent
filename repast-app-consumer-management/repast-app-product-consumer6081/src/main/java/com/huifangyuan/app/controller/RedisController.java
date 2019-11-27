@@ -84,5 +84,35 @@ public class RedisController extends BaseController {
     }
 
 
+    @GetMapping("/getZeroCat")
+    @ApiOperation(value = "从redis中取出0级分类",notes = "从redis中取出0级分类，如果redis取出不成功再进mysql查询")
+    public ResultData getZeroCat(){
+
+
+        if (null!=repastService.getZeroCat()){
+
+            return success(repastService.getZeroCat());
+        }
+        return failed();
+    }
+
+
+
+
+
+
+
+    @PostMapping("/insertAllShopInfoToRedis")
+    @ApiOperation(value = "将全部商品存入redis",notes = "key为静态常量+product_id，value为该商品的全部数据+member_price联查")
+    public ResultData insertAllShopInfoToRedis(){
+
+
+        if (true==repastService.insertAllShopInfoToRedis()){
+
+            return success();
+        }
+        return failed();
+    }
+
 
 }

@@ -2,9 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
-import com.huifangyuan.app.service.ProductService;
-import com.huifangyuan.app.service.ShopCommentService;
-import com.huifangyuan.app.service.ShopInfoService;
+import com.huifangyuan.app.service.*;
 import com.huifangyuan.app.vo.ProductVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,13 +27,19 @@ public class ShopInfoController {
     @Autowired
     private ShopCommentService shopCommentService;
 
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private MyRedisService myRedisService;
+
 
     @GetMapping("/getShopInfoByPrimaryKey")
     public ShopInfoVo getShopInfoByPrimaryKey(@RequestParam(value = "ShopId") Long ShopId){
 
         System.out.println("进入8081");
         System.out.println(ShopId);
-        return shopInfoService.getShopInfoByPrimaryKey(ShopId);
+        return shopInfoService.getShopInfoByPrimaryKey(ShopId,redisService,myRedisService);
     }
 
     /**

@@ -39,4 +39,10 @@
     where usi.id = #{shopId}
   </select>
 
+    <select id="getAllShopInfo" resultType="com.huifangyuan.app.vo.ShopInfoVo">
+         select usi.id shopId, usi.name, usi.province, usi.city, usi.borough,
+    usi.lng, usi.lat, usi.phone, usf.id facilityId, usf.title, usf.description from ums_shop_information usi
+        inner join ums_shop_facility usf on usi.id = usf.shop_id
+    </select>
+
 </mapper>

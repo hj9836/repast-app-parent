@@ -121,6 +121,19 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             public boolean insertZeroCatToRedis() {
                 return false;
             }
+
+
+            @Override
+            public List<ProductCat> getZeroCat() {
+                System.out.println("进入"+"获取level=0的分类信息"+"熔断方法");
+                return null;
+            }
+
+            @Override
+            public boolean insertAllShopInfoToRedis() {
+                System.out.println("进入"+"向redis中存入全部的商家信息"+"熔断方法");
+                return false;
+            }
         };
         return repastService;
     }

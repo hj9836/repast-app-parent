@@ -172,7 +172,13 @@ public interface IRepastService {
     @GetMapping("/insertZeroCatToRedis")
     boolean insertZeroCatToRedis();
 
+    @GetMapping("/getZeroCat")
+    List<ProductCat> getZeroCat();
 
+
+
+    @PostMapping("/insertAllShopInfoToRedis")
+    boolean insertAllShopInfoToRedis();
 
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 

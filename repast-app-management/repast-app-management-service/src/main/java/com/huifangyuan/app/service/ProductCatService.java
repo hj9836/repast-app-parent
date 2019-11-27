@@ -5,12 +5,15 @@ import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.mapper.ProductCatMapper;
 import com.huifangyuan.app.mapper.ProductInfoMapper;
+import com.huifangyuan.app.utils.JSONUtil;
 import com.huifangyuan.app.vo.MemberProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+
+import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_LEVEL0CAT_KEY;
 
 @Service
 public class ProductCatService extends BaseService<ProductCat> {
@@ -63,8 +66,25 @@ public class ProductCatService extends BaseService<ProductCat> {
 
 
 
+    public List<ProductCat> getZeroCat(RedisService redisService){
+        //首先从redis中获取
+        String s = null;
+        try {
+            s = redisService.get(REDIS_LEVEL0CAT_KEY);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        List<ProductCat> productCats = JSONUtil.toList(s, ProductCat.class);
+        if (null!=productCats){
+            return productCats;
+
+        }
 
 
+
+        return productCatMapper.getAllLevelIsZero();
+    }
 
 
 

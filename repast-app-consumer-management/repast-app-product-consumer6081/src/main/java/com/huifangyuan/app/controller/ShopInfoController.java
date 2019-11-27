@@ -40,7 +40,7 @@ public class ShopInfoController extends BaseController {
         if (null!=repastService.getShopInfoByPrimaryKey(ShopId)){
             System.out.println(repastService.getShopInfoByPrimaryKey(ShopId).getName());
             dataMap.put("Shop",repastService.getShopInfoByPrimaryKey(ShopId));
-            return success(dataMap);
+            return success(repastService.getShopInfoByPrimaryKey(ShopId));
         }
         return failed();
     }
