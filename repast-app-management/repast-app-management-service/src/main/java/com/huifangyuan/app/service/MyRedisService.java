@@ -110,7 +110,40 @@ public class MyRedisService {
 
     }
 
+    public MemberProduct getProductByPrimayKeyFromRedis (Long productId, RedisService redisService){
+        String product_JSON = null;
 
+        //首先判断list的长度，如果不为空则查询redis
+        if(0!=productId || null!=productId){
+            //for循环遍历list数组，用所拿到的Long查询redis中的商品信息
+
+            try {
+
+
+                    product_JSON = redisService.get(REDIS_PRODUCT_KEY+productId);//PREFIX_PRODUCT为redis中商品数据的KEY值固定前缀，使用静态常量解决硬编码
+
+
+                    //然后把字符串类型的JSON数据转换成Product实体类对象
+                    //考虑脏读问题，有可能查询的瞬间商家把该商品删除了，此处要做Redis返回数据的非空判断
+                    if(""!=product_JSON || product_JSON!=null){
+                        // 如果数据不为空，则添加进Product_List中，否则不作任何处理，直接进入下一次循环
+                        MemberProduct p = JSONUtil.toObject(product_JSON, MemberProduct.class);
+                        return p;
+                    }
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+                return null;
+            }
+
+
+        }
+        //如果list长度为空，则返回msg：没有相关商品！
+        return null;
+
+
+    }
 
 
     public boolean insertZeroCatToRedis(RedisService redisService, MyRedisService myRedisService){

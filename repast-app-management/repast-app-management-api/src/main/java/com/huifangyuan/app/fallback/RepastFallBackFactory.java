@@ -158,6 +158,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 System.out.println("进入"+"首页推荐商品（带分页信息）"+"熔断方法");
                 return null;
             }
+
+            @Override
+            public MemberProduct getProductInfoByPrimaryKey(Long productId) {
+                System.out.println("进入"+"根据主键查询商品信息"+"熔断方法");
+                return null;
+            }
         };
         return repastService;
     }

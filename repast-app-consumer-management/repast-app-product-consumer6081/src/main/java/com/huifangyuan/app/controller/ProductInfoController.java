@@ -111,12 +111,35 @@ public class ProductInfoController extends BaseController {
     @ApiOperation(value = "店铺推荐商品信息", notes = "通过店铺主键查询店铺推荐商品的详细信息")
     public ResultData getAllShopRecommendProductByShopId(Long shopId){
         List<MemberProduct> recommendProductList = repastService.getAllShopRecommendProductByShopId(shopId);
-        if (recommendProductList.size()>0){
-            return success(recommendProductList);
+        if (recommendProductList!=null){
+            if (recommendProductList.size()==0){
+                return success("该店家没有推荐商品");
+            }else{
+                return success(recommendProductList);
+            }
+
         }else{
             return failed();
         }
     }
+
+    /**
+     * 根据商品的ID查询当前商品信息
+     * <>杨欣宜</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getProductInfoByPrimaryKey")
+    @ApiOperation(value = "根据商品的ID查询当前商品信息", notes = "根据商品的ID查询当前商品信息")
+    public ResultData getProductInfoByPrimaryKey(Long productId){
+        MemberProduct p = repastService.getProductInfoByPrimaryKey(productId);
+        if (null!=p){
+            return success(p);
+        }
+        return failed();
+    }
+
+
 
 
 

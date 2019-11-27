@@ -104,9 +104,11 @@
             #{id}
         </foreach>
 
-
-
     </select>
 
+    <select id="getProductInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
+    SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
+    LEFT JOIN pms_member_price m ON p.id=m.product_id where p.delete_status = 0 and p.publish_status = 1 and p.id = #{productId}
+    </select>
 
 </mapper>

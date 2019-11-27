@@ -177,6 +177,40 @@ public class ProductInfoService extends BaseService<Product> {
         return getProductListByPrimaryKeyList(list);
     }
 
+
+
+    public MemberProduct getProductInfoByPrimaryKey(Long productId,RedisService redisService,MyRedisService myRedisService){
+        MemberProduct productByPrimayKeyFromRedis = myRedisService.getProductByPrimayKeyFromRedis(productId, redisService);
+        if (null!=productByPrimayKeyFromRedis) {
+            return productByPrimayKeyFromRedis;
+        }
+        return productInfoMapper.getProductInfoByPrimaryKey(productId);
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*--------------------------------根据List<Long>返回List<MemberProduct>的工具类------------------------------------*/
     //此方法相当于工具类，但一定不能用static修饰，否则会线程串线！！！
     public List<MemberProduct> getProductListByPrimaryKeyList(List<Long> productList){
         System.out.println("进入半工具类方法中");
@@ -190,7 +224,7 @@ public class ProductInfoService extends BaseService<Product> {
         return productInfoMapper.getProductListByPrimaryKeyList(list);
 
     }
-
+    /*--------------------------------根据List<Long>返回List<MemberProduct>的工具类------------------------------------*/
 
 
 

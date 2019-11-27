@@ -214,6 +214,10 @@ public interface IRepastService {
     @PostMapping("/getRecommandProduct")
     List<MemberProduct> getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize);
 
+    @GetMapping ("/getProductInfoByPrimaryKey")
+    MemberProduct getProductInfoByPrimaryKey(@RequestParam(value = "productId") Long productId);
+
+
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 
 

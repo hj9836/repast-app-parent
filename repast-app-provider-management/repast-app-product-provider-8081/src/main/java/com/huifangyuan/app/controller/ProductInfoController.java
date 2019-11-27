@@ -25,6 +25,13 @@ public class ProductInfoController {
     private ProductInfoService productInfoService;
     @Autowired
     private ProductCatService productCatService;
+
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private MyRedisService myRedisService;
+
     /**
      *@ClassName ProductController
      *@Description
@@ -93,7 +100,7 @@ public class ProductInfoController {
      * @return
      */
     @GetMapping("/getAllProduct")
-    public List<MemberProduct> getAllProductByShopId(Long shopId, RedisService redisService, MyRedisService myRedisService){
+    public List<MemberProduct> getAllProductByShopId(Long shopId){
         List<MemberProduct> allProductByShopId = productInfoService.getAllProductByShopId(shopId,redisService,myRedisService);
         if (allProductByShopId.size()>0){
             return allProductByShopId;
@@ -108,7 +115,7 @@ public class ProductInfoController {
      * @return
      */
     @GetMapping("/getAllShopRecommendProductByShopId")
-    public List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId,RedisService redisService,MyRedisService myRedisService) {
+    public List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId) {
         List<MemberProduct> allShopRecommendProductByShopId = productInfoService.getAllShopRecommendProductByShopId(shopId,redisService,myRedisService);
         if (allShopRecommendProductByShopId.size()>0){
             return allShopRecommendProductByShopId;
@@ -116,5 +123,16 @@ public class ProductInfoController {
         return null;
     }
 
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品部分信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getProductInfoByPrimaryKey")
+    public MemberProduct getProductInfoByPrimaryKey(Long productId) {
+
+        return productInfoService.getProductInfoByPrimaryKey(productId,redisService,myRedisService);
+    }
 
 }

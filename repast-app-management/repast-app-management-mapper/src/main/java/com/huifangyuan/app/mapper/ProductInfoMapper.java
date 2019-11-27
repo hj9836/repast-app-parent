@@ -71,4 +71,6 @@ public interface ProductInfoMapper extends Mapper<Product> {
 
     List<MemberProduct> getProductListByPrimaryKeyList(Map<String,List<Long>> list);
 
+    MemberProduct getProductInfoByPrimaryKey(Long productId);
+
 }
