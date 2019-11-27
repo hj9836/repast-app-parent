@@ -14,7 +14,7 @@ import org.springframework.stereotype.Controller;
 public class BaseController {
 
     /**
-     * @author Seven Lee
+     * @author laoyang
      * @description
      *      登录成功，使用系统消息
      * @param []
