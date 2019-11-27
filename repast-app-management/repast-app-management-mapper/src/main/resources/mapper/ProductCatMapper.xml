@@ -31,7 +31,7 @@
 
   <select id="getAllLevelIsZero" resultMap="BaseResultMap">
 
-	SELECT * from pms_product_category WHERE `level`=0;
+	SELECT * from pms_product_category WHERE `level`=0 LIMIT 0,8
   </select>
 
 
