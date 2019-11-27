@@ -16,7 +16,7 @@
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
-    <select id="selectProductByshopId" resultType="com.huifangyuan.app.domain.ProductCat">
+    <select id="selectProductCatByshopId" resultType="com.huifangyuan.app.domain.ProductCat">
       select * from pms_product_category where shop_id=#{shopId}
     </select>
   <select id="selectProductCatByShopId" resultType="java.lang.Long">
@@ -33,9 +33,6 @@
 
 	SELECT * from pms_product_category WHERE `level`=0;
   </select>
-
-
-
 
 
 </mapper>

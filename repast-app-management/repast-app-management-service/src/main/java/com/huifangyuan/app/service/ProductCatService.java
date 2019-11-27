@@ -33,7 +33,7 @@ public class ProductCatService extends BaseService<ProductCat> {
     };
 
     public List<ProductCat> selectProductByshopid(Long shopId){
-        List<ProductCat> productCats = productCatMapper.selectProductByshopId(shopId);
+        List<ProductCat> productCats = productCatMapper.selectProductCatByshopId(shopId);
         if ((productCats.size()>0)){
             return productCats;
         }
@@ -55,7 +55,7 @@ public class ProductCatService extends BaseService<ProductCat> {
         List<ProductCat> productCatListByPrimayKeyFromRedis = shopmenuRedisService.getProductCatListByPrimayKeyFromRedis(productCat_list, redisService);
         if (null!=productCatListByPrimayKeyFromRedis || 0==productCatListByPrimayKeyFromRedis.size()){
             //如果redis挂了，或者查询到的值为空，则执行原来所写的代码即可
-            List<ProductCat> productCatList = productCatMapper.selectProductByshopId(shopId);
+            List<ProductCat> productCatList = productCatMapper.selectProductCatByshopId(shopId);
             return productCatList;
         }
 
@@ -85,15 +85,5 @@ public class ProductCatService extends BaseService<ProductCat> {
 
         return productCatMapper.getAllLevelIsZero();
     }
-
-
-
-
-
-
-
-
-
-
 
 }
