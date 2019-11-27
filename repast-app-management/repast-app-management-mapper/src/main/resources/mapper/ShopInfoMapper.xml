@@ -45,4 +45,12 @@
         inner join ums_shop_facility usf on usi.id = usf.shop_id
     </select>
 
+    <select id="getShopAllInfoByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.ShopInfoVo">
+        select usi.id shopId,usi.name,usi.province,usi.city,usi.borough,usi.address,usi.lng,usi.lat,usi.closed,usi.open_time openTime,
+usi.phone,usi.images,usi.`status`,usi.auth_start_time authStartTime,usi.auth_long authLong,usi.template_id templateId,usi.business_license businessLicense,usi.food_license foodLicense,usi.sanitation_license sanitationLicense,usi.assess,usf.title,usf.description,usf.icon
+from ums_shop_information usi
+	INNER JOIN ums_shop_facility usf on usi.id = usf.shop_id
+	where usi.id = #{shopId}
+    </select>
+
 </mapper>

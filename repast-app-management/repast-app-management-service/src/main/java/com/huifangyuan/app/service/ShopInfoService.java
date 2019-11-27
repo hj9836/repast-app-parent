@@ -36,4 +36,21 @@ public class ShopInfoService {
         //否则返回原来的方法
         return shopInfoMapper.getShopInfoByPrimaryKey(ShopId);
     }
+
+
+    /**
+     *  根据店铺的主键查询店铺的所有信息
+     *
+     *
+     * @param shopId
+     * @return
+     */
+    public ShopInfoVo getShopAllInfoByShopId(Long shopId){
+        ShopInfoVo shopAllInfoByShop = shopInfoMapper.getShopAllInfoByShopId(shopId);
+        return shopAllInfoByShop;
+    }
+
+
+
+
 }

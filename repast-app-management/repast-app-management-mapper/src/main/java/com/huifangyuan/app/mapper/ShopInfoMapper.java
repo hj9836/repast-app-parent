@@ -13,4 +13,6 @@ public interface ShopInfoMapper {
     ShopInfoVo getShopInfoByPrimaryKey (Long ShopId);
 
     List<ShopInfoVo> getAllShopInfo();
+
+    ShopInfoVo getShopAllInfoByShopId(Long shopId);
 }

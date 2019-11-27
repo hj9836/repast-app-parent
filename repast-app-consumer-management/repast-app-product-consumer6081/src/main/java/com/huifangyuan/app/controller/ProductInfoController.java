@@ -84,7 +84,39 @@ public class ProductInfoController extends BaseController {
         return failed();
     }
 
+    /**
+     * 根据店铺ID查询所有商品的信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllProductByShopId")
+    @ApiOperation(value = "商品信息", notes = "通过店铺主键查询商品信息")
+    public ResultData getAllProductByShopId(Long shopId){
+        List<MemberProduct> allProductByShopId = repastService.getAllProductByShopId(shopId);
+        if (null != allProductByShopId){
+            return success(allProductByShopId);
+        }else{
+            return failed();
+        }
+    }
 
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllShopRecommendProductByShopId")
+    @ApiOperation(value = "店铺推荐商品信息", notes = "通过店铺主键查询店铺推荐商品的详细信息")
+    public ResultData getAllShopRecommendProductByShopId(Long shopId){
+        List<MemberProduct> recommendProductList = repastService.getAllShopRecommendProductByShopId(shopId);
+        if (recommendProductList.size()>0){
+            return success(recommendProductList);
+        }else{
+            return failed();
+        }
+    }
 
 
 

@@ -65,7 +65,7 @@ public class ProductInfoService extends BaseService<Product> {
         return null;
     }
 
-    /*@ClassName ProductService
+    /**@ClassName ProductService
      *@Description
      *@Date 16:47 2019/11/23
      *@author eric
@@ -114,7 +114,36 @@ public class ProductInfoService extends BaseService<Product> {
     }
 
 
+    /**
+     * 通过店铺id查询当前店铺的所有上线状态商品
+     * @param shopId
+     * @return
+     */
+    public List<MemberProduct> getAllProductByShopId(Long shopId,RedisService redisService,MyRedisService myRedisService){
+        List<Long> ListId = productInfoMapper.getAllProductIdByShopId(shopId);
+        List<MemberProduct> productListByPrimayKeyFromRedis = myRedisService.getProductListByPrimayKeyFromRedis(ListId, redisService);
+        if (null == productListByPrimayKeyFromRedis || 0 == productListByPrimayKeyFromRedis.size()){
+            List<MemberProduct> allProductByShopId = productInfoMapper.getAllProductByShopId(shopId);
+            return allProductByShopId;
+        }
+        return productListByPrimayKeyFromRedis;
+    }
 
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品信息
+     * @param shopId
+     * @return
+     */
+    public List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId,RedisService redisService,MyRedisService myRedisService){
+        List<Long> listId = productInfoMapper.getAllShopRecommendProductIdByShopId(shopId);
+        List<MemberProduct> productListByPrimayKeyFromRedis = myRedisService.getProductListByPrimayKeyFromRedis(listId, redisService);
+        if (null == productListByPrimayKeyFromRedis || 0 == productListByPrimayKeyFromRedis.size()){
+            List<MemberProduct> allShopRecommendProductByShopId = productInfoMapper.getAllShopRecommendProductByShopId(shopId);
+            System.out.println(allShopRecommendProductByShopId);
+            return allShopRecommendProductByShopId;
+        }
+        return productListByPrimayKeyFromRedis;
+    }
 
 
 

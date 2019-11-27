@@ -37,7 +37,33 @@ public interface ProductInfoMapper extends Mapper<Product> {
 
     List<MemberProduct> selectAllProductInfo();
 
+    /**
+     * 根据店铺ID查询所有商品的信息
+     * @param shopId
+     * @return
+     */
+    List<MemberProduct> getAllProductByShopId(Long shopId);
 
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品信息
+     * @param shopId
+     * @return
+     */
+    List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId);
+
+    /**
+     * g根据店铺Id查询所有商品的Id
+     * @param shopId
+     * @return
+     */
+    List<Long> getAllProductIdByShopId(Long shopId);
+
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品Id
+     * @param shopId
+     * @return
+     */
+    List<Long> getAllShopRecommendProductIdByShopId(Long shopId);
 
 
 

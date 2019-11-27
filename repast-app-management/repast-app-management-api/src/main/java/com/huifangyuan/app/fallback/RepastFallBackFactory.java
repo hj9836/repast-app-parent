@@ -95,6 +95,24 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
+            public ShopInfoVo getShopAllInfoByShopId(Long shopId) {
+                System.out.println("测试店铺信息熔断数据");
+                return null;
+            }
+
+            @Override
+            public List<MemberProduct> getAllProductByShopId(Long shopId) {
+                System.out.println("测试商品信息熔断数据");
+                return null;
+            }
+
+            @Override
+            public List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId) {
+                System.out.println("测试店铺推荐商品信息熔断数据");
+                return null;
+            }
+
+            @Override
             public boolean insertAllProductToRedis() {
 
                 return false;

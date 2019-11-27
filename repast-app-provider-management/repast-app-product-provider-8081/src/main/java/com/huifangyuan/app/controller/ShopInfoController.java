@@ -77,8 +77,18 @@ public class ShopInfoController {
             e.printStackTrace();
         }
         return null;
-    };
+    }
 
 
+    /**
+     * 通过店铺ID查询店铺的所有的信息
+     * Mrlin119
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopAllInfo")
+    public ShopInfoVo getShopAllInfoByShopId(Long shopId){
+        return shopInfoService.getShopAllInfoByShopId(shopId);
+    }
 
 }

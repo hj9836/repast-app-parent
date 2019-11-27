@@ -75,4 +75,19 @@
       	SELECT p.id Id from pms_product p
       	LEFT JOIN pms_member_price m ON p.id=m.product_id where p.shop_id=#{ShopId}
     </select>
+
+
+    <select id="getAllProductByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.MemberProduct">
+        select id productId,pic,name,price,promotion_price promotionPrice,sale,description from pms_product where delete_status=0 and publish_status=1 and shop_id = #{ShopId}
+    </select>
+    <select id="getAllProductIdByShopId" parameterType="long" resultType="long">
+        select p.id Id from pms_product p where delete_status=0 and publish_status=1 and shop_id = #{ShopId}
+    </select>
+
+    <select id="getAllShopRecommendProductByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.MemberProduct">
+        select p.id productId,p.name,p.pic,p.sale,p.promotion_price promotionPrice,p.gift_point giftPoint,p.price from pms_product p where p.delete_status=0 and p.publish_status = 1 and p.recommand_status = 1 and p.currency = 0 and p.shop_id = #{ShopId}
+    </select>
+    <select id="getAllShopRecommendProductIdByShopId" parameterType="long" resultType="long">
+        select p.id productId from pms_product p where p.delete_status=0 and p.publish_status = 1 and p.recommand_status = 1 and p.currency = 0 and p.shop_id = #{ShopId}
+    </select>
 </mapper>

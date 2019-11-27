@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import javax.persistence.Column;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
@@ -28,5 +29,14 @@ public class MemberProduct implements Serializable {
     private Integer promotionType;
     private Byte currency;
     private String description;
+
+
+    private String pic;
+    private String name;
+    private String price;
+    @Column(name = "promotion_price")
+    private String promotionPrice;
+    @Column(name = "gift_point")
+    private Long giftPoint;
 
 }

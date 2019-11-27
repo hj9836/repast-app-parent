@@ -2,9 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
-import com.huifangyuan.app.service.ProductCatService;
-import com.huifangyuan.app.service.ProductInfoService;
-import com.huifangyuan.app.service.ShopInfoService;
+import com.huifangyuan.app.service.*;
 import com.huifangyuan.app.vo.MemberProduct;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +68,7 @@ public class ProductInfoController {
         }
         return null;
     }
-    /*@ClassName ProductService
+    /**@ClassName ProductService
      *@Description
      *@Date 16:47 2019/11/23
      *@author eric
@@ -84,6 +82,36 @@ public class ProductInfoController {
         List<MemberProduct> memberProductList = productInfoService.selectProductByShopId(shopId);
         if (memberProductList.size()>0){
             return memberProductList;
+        }
+        return null;
+    }
+
+    /**
+     * 根据店铺ID查询所有商品部分信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllProduct")
+    public List<MemberProduct> getAllProductByShopId(Long shopId, RedisService redisService, MyRedisService myRedisService){
+        List<MemberProduct> allProductByShopId = productInfoService.getAllProductByShopId(shopId,redisService,myRedisService);
+        if (allProductByShopId.size()>0){
+            return allProductByShopId;
+        }
+        return null;
+    }
+
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品部分信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllShopRecommendProductByShopId")
+    public List<MemberProduct> getAllShopRecommendProductByShopId(Long shopId,RedisService redisService,MyRedisService myRedisService) {
+        List<MemberProduct> allShopRecommendProductByShopId = productInfoService.getAllShopRecommendProductByShopId(shopId,redisService,myRedisService);
+        if (allShopRecommendProductByShopId.size()>0){
+            return allShopRecommendProductByShopId;
         }
         return null;
     }

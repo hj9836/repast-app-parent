@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Company AAA软件教育
@@ -90,6 +91,22 @@ public class ShopInfoController extends BaseController {
             return failed();
         }
     }
-
+    /**
+     * 通过店铺的ID查询到当前店铺的详细信息
+     * <>霍晨亮</>
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopAllInfo")
+    @ApiOperation(value = "店铺的详细信息",notes = "通过店铺的ID查询到当前店铺的详细信息")
+    public ResultData getShopAllInfoByShop(Long shopId){
+        ShopInfoVo shopAllInfoByShop = repastService.getShopAllInfoByShopId(shopId);
+        if (null != shopAllInfoByShop){
+            Map<String, Object> map = new HashMap<>();
+            map.put("shop",shopAllInfoByShop);
+            return success(map);
+        }
+        return null;
+    }
 
 }

@@ -133,6 +133,37 @@ public interface IRepastService {
     /*---------------------------------------------闫增健-------------------------------------------------------------*/
 
 
+    /*---------------------------------------------霍晨亮-------------------------------------------------------------*/
+    /**
+     * 根据店铺的ID查询店铺的所有信息
+     * Mrlin119
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getShopAllInfo")
+    ShopInfoVo getShopAllInfoByShopId(@RequestParam("shopId") Long shopId);
+
+    /**
+     * 根据店铺ID查询所有的商品
+     * Mrlin119
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllProduct")
+    List<MemberProduct> getAllProductByShopId(@RequestParam("shopId") Long shopId);
+
+
+    /**
+     * 根据商铺的ID查询当前店铺所推荐的商品信息
+     * Mrlin119
+     * @param shopId
+     * @return
+     */
+    @GetMapping("/getAllShopRecommendProductByShopId")
+    List<MemberProduct> getAllShopRecommendProductByShopId(@RequestParam("shopId") Long shopId);
+
+    /*---------------------------------------------霍晨亮-------------------------------------------------------------*/
+
 
 
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
