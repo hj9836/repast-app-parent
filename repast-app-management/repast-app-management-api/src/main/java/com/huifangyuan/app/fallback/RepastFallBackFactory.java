@@ -152,6 +152,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 System.out.println("进入"+"向redis中存入全部的商家信息"+"熔断方法");
                 return false;
             }
+
+            @Override
+            public List<MemberProduct> getRecommandProduct(Integer pageNum, Integer pageSize) {
+                System.out.println("进入"+"首页推荐商品（带分页信息）"+"熔断方法");
+                return null;
+            }
         };
         return repastService;
     }

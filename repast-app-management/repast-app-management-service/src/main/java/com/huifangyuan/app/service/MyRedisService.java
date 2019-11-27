@@ -98,6 +98,7 @@ public class MyRedisService {
             }
             }catch (Exception e){
                 e.printStackTrace();
+                return null;
             }
             //for循环结束之后，返回Product_List
             return Product_List;

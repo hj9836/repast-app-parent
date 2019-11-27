@@ -4,6 +4,7 @@ import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
+import com.huifangyuan.app.vo.MemberProduct;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -114,5 +115,15 @@ public class RedisController extends BaseController {
         return failed();
     }
 
+    @PostMapping("/getRecommandProduct")
+    @ApiOperation(value = "获取热门商品",notes = "首页页面上的，获取热门商品功能")
+    public ResultData getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
+        List<MemberProduct> p = repastService.getRecommandProduct(pageNum,pageSize);
 
+        if (null!=p){
+
+            return success(p);
+        }
+        return failed();
+    }
 }

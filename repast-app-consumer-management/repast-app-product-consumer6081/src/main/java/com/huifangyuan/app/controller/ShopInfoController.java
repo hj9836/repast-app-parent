@@ -102,7 +102,7 @@ public class ShopInfoController extends BaseController {
     public ResultData getShopAllInfoByShop(Long shopId){
         ShopInfoVo shopAllInfoByShop = repastService.getShopAllInfoByShopId(shopId);
         if (null != shopAllInfoByShop){
-            Map<String, Object> map = new HashMap<>();
+            Map<String, Object> map = new HashMap<String, Object>();
             map.put("shop",shopAllInfoByShop);
             return success(map);
         }

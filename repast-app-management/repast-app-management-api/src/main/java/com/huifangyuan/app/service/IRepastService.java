@@ -211,6 +211,9 @@ public interface IRepastService {
     @PostMapping("/insertAllShopInfoToRedis")
     boolean insertAllShopInfoToRedis();
 
+    @PostMapping("/getRecommandProduct")
+    List<MemberProduct> getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize);
+
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 
 

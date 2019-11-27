@@ -13,7 +13,9 @@ import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.huifangyuan.app.staticstatus.StaticProperties.REDIS_LEVEL0CAT_KEY;
 
@@ -145,6 +147,49 @@ public class ProductInfoService extends BaseService<Product> {
         return productListByPrimayKeyFromRedis;
     }
 
+
+    public List<MemberProduct> getRecommandProduct(Integer pageNum,Integer pageSize,RedisService redisService,MyRedisService myRedisService){
+        System.out.println(pageNum);
+        System.out.println(pageSize);
+        //首先计算起始页startPage
+        if (pageSize<1){
+            pageSize=4;
+        }
+        Integer startPage=0;
+        startPage=(pageNum-1)*pageSize;
+        if (startPage<0){
+            startPage=0;
+        }
+        System.out.println(startPage);
+        //然后去redis中拿取数据
+        HashMap<String, Integer> pageMap = new HashMap<String, Integer>();
+        pageMap.put("startPage",startPage);
+        pageMap.put("pageSize",pageSize);
+
+        List<Long> list = productInfoMapper.getRecommandProductId(pageMap);
+        System.out.println(list);
+        List<MemberProduct> productListByPrimayKeyFromRedis = myRedisService.getProductListByPrimayKeyFromRedis(list, redisService);
+        if (null!=productListByPrimayKeyFromRedis){
+            System.out.println("进入redis中查询到的商品不为空中");
+            return productListByPrimayKeyFromRedis;
+        }
+
+        return getProductListByPrimaryKeyList(list);
+    }
+
+    //此方法相当于工具类，但一定不能用static修饰，否则会线程串线！！！
+    public List<MemberProduct> getProductListByPrimaryKeyList(List<Long> productList){
+        System.out.println("进入半工具类方法中");
+        /*if (productList.size()==0){
+            //一定要做这步判断，不然当list中没有参数时，动态sql查询出来的是全部商品！
+            return null;
+        }*/
+        Map<String, List<Long>> list = new HashMap<String, List<Long>>();
+        list.put("list",productList);
+        System.out.println(productInfoMapper.getProductListByPrimaryKeyList(list).get(0).getName());
+        return productInfoMapper.getProductListByPrimaryKeyList(list);
+
+    }
 
 
 

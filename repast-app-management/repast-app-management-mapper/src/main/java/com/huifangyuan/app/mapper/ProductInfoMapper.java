@@ -6,6 +6,7 @@ import com.huifangyuan.app.vo.ShopInfoVo;
 import tk.mybatis.mapper.common.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface ProductInfoMapper extends Mapper<Product> {
@@ -66,5 +67,8 @@ public interface ProductInfoMapper extends Mapper<Product> {
     List<Long> getAllShopRecommendProductIdByShopId(Long shopId);
 
 
+    List<Long> getRecommandProductId(Map<String,Integer> map);
+
+    List<MemberProduct> getProductListByPrimaryKeyList(Map<String,List<Long>> list);
 
 }

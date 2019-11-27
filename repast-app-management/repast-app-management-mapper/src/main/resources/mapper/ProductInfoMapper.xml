@@ -90,4 +90,23 @@
     <select id="getAllShopRecommendProductIdByShopId" parameterType="long" resultType="long">
         select p.id productId from pms_product p where p.delete_status=0 and p.publish_status = 1 and p.recommand_status = 1 and p.currency = 0 and p.shop_id = #{ShopId}
     </select>
+
+
+    <select id="getRecommandProductId" parameterType="java.lang.Integer" resultType="java.lang.Long">
+      	SELECT p.id productId from pms_product p where recommand_status = 1 AND delete_status = 0 and publish_status = 1 and stock > 0 LIMIT ${startPage},${pageSize}
+    </select>
+
+
+    <select id="getProductListByPrimaryKeyList" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
+
+        SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType from pms_product p
+        <foreach collection="list" item="id" open="where p.id in(" close=")" separator=",">
+            #{id}
+        </foreach>
+
+
+
+    </select>
+
+
 </mapper>
