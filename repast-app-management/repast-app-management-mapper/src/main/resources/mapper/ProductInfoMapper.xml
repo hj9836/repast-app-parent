@@ -59,6 +59,7 @@
             <result column="price" property="price" jdbcType="DECIMAL"/>
             <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL"/>
             <result column="member_price" property="memberPrice" jdbcType="DECIMAL"/>
+            <result column="sale" property="sale" jdbcType="INTEGER"/>
         </collection>
 
 
@@ -131,7 +132,7 @@
 
     <select id="getCanteenDateByShopId" parameterType="java.lang.Long" resultMap="CanteenDataMap">
 
-    SELECT pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,mp.member_price
+    SELECT pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,p.sale,mp.member_price
 	FROM pms_product p
 	INNER JOIN pms_product_category pc on p.shop_id = pc.shop_id AND p.product_category_id = pc.id
 	LEFT JOIN pms_member_price mp on p.id = mp.product_id

@@ -18,12 +18,12 @@ public class AdvertiseVo implements Serializable {
     private String name;
     private Long positionId;
     private String pic;
-    private Date start_time;
-    private Date end_time;
+    private Date startTime;
+    private Date endTime;
     private int status;
     private int sort;
-    private int click_count;
-    private int order_count;
+    private int clickCount;
+    private int orderCount;
     private String url;
     private String note;
 

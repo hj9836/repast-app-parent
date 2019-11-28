@@ -1,6 +1,7 @@
 package com.huifangyuan.app.service;
 
 
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
@@ -228,6 +229,11 @@ public interface IRepastService {
 
     @GetMapping ("/getCanteenDateByShopId")
     List<CanTeenDateVo> getCanteenDateByShopId(@RequestParam("shopId") Long ShopId);
+
+    @GetMapping ("/getShopAllInfoLAOYANG")
+    ShopInfoCutom getShopAllInfoLAOYANG(@RequestParam("shopId") Long ShopId);
+
+
 
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 

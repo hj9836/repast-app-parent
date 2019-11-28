@@ -1,6 +1,7 @@
 package com.huifangyuan.app.fallback;
 
 
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
@@ -176,7 +177,13 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public List<CanTeenDateVo> getCanteenDateByShopId(Long ShopId) {
-                System.out.println("进入"+"全组最屌的"+"熔断方法");
+                System.out.println("进入"+"全组最屌的店家+商品"+"熔断方法");
+                return null;
+            }
+
+            @Override
+            public ShopInfoCutom getShopAllInfoLAOYANG(Long ShopId) {
+                System.out.println("进入"+"全组最屌的店家信息+小图标"+"熔断方法");
                 return null;
             }
         };

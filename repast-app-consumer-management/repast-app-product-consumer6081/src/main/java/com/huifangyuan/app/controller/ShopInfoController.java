@@ -2,6 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
@@ -125,6 +126,19 @@ public class ShopInfoController extends BaseController {
         } else {
             return failed();
         }
+    }
+
+
+    @GetMapping("/getShopAllInfoLAOYANG")
+    @ApiOperation(value = "真正的店铺的详细信息，一对多",notes = "一个店铺信息，四个图标信息")
+    public ResultData getShopAllInfoLAOYANG(Long shopId){
+        ShopInfoCutom shopAllInfoByShop = repastService.getShopAllInfoLAOYANG(shopId);
+        if (null != shopAllInfoByShop){
+            Map<String, Object> map = new HashMap<String, Object>();
+            map.put("shop",shopAllInfoByShop);
+            return success(map);
+        }
+        return null;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.huifangyuan.app.controller;
 
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
@@ -111,6 +112,11 @@ public class ShopInfoController {
     @GetMapping("/getProductByShopId")
     public List<Product> getProductByShopId(@RequestParam("shopId") Long shopId) {
         return productService.getProductByShopId(shopId);
+    }
+
+    @GetMapping ("/getShopAllInfoLAOYANG")
+    ShopInfoCutom getShopAllInfoLAOYANG(@RequestParam("shopId") Long ShopId){
+        return shopInfoService.getShopAllInfoLAOYANG(ShopId);//暂时不用redis，后面优化redis中存入的数据格式
     }
 }
 

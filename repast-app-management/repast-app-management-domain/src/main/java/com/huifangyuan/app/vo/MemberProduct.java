@@ -33,15 +33,20 @@ public class MemberProduct implements Serializable {
 
     private String pic;
     private String name;
-    @Column(name = "price")
-    private String price;
-    @Column(name = "promotion_price")
-    private String promotionPrice;
-    @Column(name = "member_price")
-    private String  memberPrice;
     @Column(name = "gift_point")
     private Long giftPoint;
     private Integer pageNuml;
     private Integer pageSize;
+
+
+
+    /*！！！！！以下三个价格变量不允许进行任何修改，如果数据格式不兼容联系老杨！！！！*/
+    @Column(name = "price")
+    private BigDecimal price;
+    @Column(name = "promotion_price")
+    private BigDecimal promotionPrice;
+    @Column(name = "member_price")
+    private BigDecimal  memberPrice;
+    /*特别不准使用String类型，因为要和订单组做对接，价格数据为String不符合逻辑*/
 
 }

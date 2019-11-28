@@ -1,5 +1,6 @@
 package com.huifangyuan.app.service;
 
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
 import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
@@ -56,6 +57,9 @@ public class ShopInfoService {
         return shopInfoMapper.getAdvertise();
     }
 
+    public ShopInfoCutom getShopAllInfoLAOYANG(Long shopId){
+        return shopInfoMapper.getShopAllInfoLAOYANG(shopId);
+    }
 
 
 
