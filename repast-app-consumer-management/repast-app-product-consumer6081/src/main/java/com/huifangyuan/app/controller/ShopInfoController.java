@@ -108,5 +108,23 @@ public class ShopInfoController extends BaseController {
         }
         return null;
     }
+    /**
+     * @description
+     *      通过店铺主键查询商品列表
+     * @param [shopId]
+     * @date 2019/11/21
+     * @return java.util.List<com.aaa.lee.app.domain.Product>
+     * @throws
+     **/
+    @GetMapping("/getProductByShopId")
+    @ApiOperation(value = "商品信息", notes = "通过店铺主键查询商品列表")
+    public ResultData getProductByShopId(Long shopId) {
+        List<Product> productList = repastService.getProductByShopId(shopId);
+        if(null != productList) {
+            return success(productList);
+        } else {
+            return failed();
+        }
+    }
 
 }

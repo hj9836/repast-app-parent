@@ -100,6 +100,18 @@ public class ShopInfoController {
 
         return shopInfoMapper.getAdvertise();
     }
+    /**
+     * @description
+     *      通过店铺主键查询商品列表
+     * @param [shopId]
+     * @date 2019/11/21
+     * @return java.util.List<com.aaa.lee.app.domain.Product>
+     * @throws
+     **/
+    @GetMapping("/getProductByShopId")
+    public List<Product> getProductByShopId(@RequestParam("shopId") Long shopId) {
+        return productService.getProductByShopId(shopId);
+    }
 }
 
 

@@ -71,7 +71,7 @@ public interface IRepastService {
      * @throws
      **/
     @GetMapping("/getProductByShopId")
-    List<Product> getProductByShopId(Long shopId);
+    List<Product> getProductByShopId(@RequestParam("shopId") Long shopId);
     /**
      *@ClassName IRepastService
      *@Description
