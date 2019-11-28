@@ -55,11 +55,6 @@ public class ProductService extends BaseService<Product> {
         } else {
             productVo.setName("%%");
         }
-        if(null!=productVo.getKeywords()){
-            productVo.setKeywords("%"+productVo.getKeywords()+"%");
-        } else {
-            productVo.setKeywords("%%");
-        }
         List<Product> products = productMapper.selectShopProduct(productVo);
         if(products.size()>0){
             return products;
