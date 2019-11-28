@@ -2,6 +2,7 @@ package com.huifangyuan.app.fallback;
 
 
 import com.huifangyuan.app.domain.Comment;
+import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
@@ -37,6 +38,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             @Override
             public List<ProductCat> getCateByLevel() {
                 System.out.println("通过层级查询商品类型");
+                return null;
+            }
+
+            @Override
+            public List<IntegralMall> getProductInfoByIntegral() {
+                System.out.println("查询支持用积分兑换的商品信息");
                 return null;
             }
 

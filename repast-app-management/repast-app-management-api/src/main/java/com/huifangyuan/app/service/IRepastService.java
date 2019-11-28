@@ -2,6 +2,7 @@ package com.huifangyuan.app.service;
 
 
 import com.huifangyuan.app.domain.Comment;
+import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
@@ -37,11 +38,17 @@ public interface IRepastService {
 
     /**
      * 通过层级查询商品类型
-     * @param level
-     * @return
+     * Regina
      */
     @GetMapping("/getByLevel")
     List<ProductCat> getCateByLevel();
+
+    /**
+     * 查询支持用积分兑换的商品信息
+     * Regina
+     */
+    @GetMapping("/getProductInfoByIntegral")
+    List<IntegralMall> getProductInfoByIntegral();
 
 
     /**
@@ -78,6 +85,7 @@ public interface IRepastService {
      **/
     @GetMapping("/getProductByProductCategoryId")
     List<Product> getProductByProductCategoryId(@RequestParam("productCategoryId") Long productCategoryId);
+
     /*@ClassName ProductService
      *@Description
      *@Date 16:47 2019/11/23
