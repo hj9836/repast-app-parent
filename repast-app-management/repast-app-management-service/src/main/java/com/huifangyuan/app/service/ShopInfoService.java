@@ -1,6 +1,7 @@
 package com.huifangyuan.app.service;
 
 import com.huifangyuan.app.mapper.ShopInfoMapper;
+import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -48,6 +49,11 @@ public class ShopInfoService {
     public ShopInfoVo getShopAllInfoByShopId(Long shopId){
         ShopInfoVo shopAllInfoByShop = shopInfoMapper.getShopAllInfoByShopId(shopId);
         return shopAllInfoByShop;
+    }
+
+    public List<AdvertiseVo> getAdvertise(){
+
+        return shopInfoMapper.getAdvertise();
     }
 
 

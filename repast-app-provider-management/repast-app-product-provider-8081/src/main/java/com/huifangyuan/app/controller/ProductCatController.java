@@ -1,10 +1,11 @@
 package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.domain.ProductCat;
-import com.huifangyuan.app.service.ProductCatService;
-import com.huifangyuan.app.service.ProductInfoService;
+import com.huifangyuan.app.service.*;
+import com.huifangyuan.app.vo.MemberProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,16 @@ import java.util.List;
 public class ProductCatController {
 
     @Autowired
-    ProductCatService productCatService;
+    private ProductCatService productCatService;
+
+    @Autowired
+    private IntegralMallService integralMallService;
+
+    @Autowired
+    private RedisService redisService;
+
+    @Autowired
+    private MyRedisService myRedisService;
 
     /**
      * 通过层级查询商品类型
@@ -30,6 +40,7 @@ public class ProductCatController {
     public List<ProductCat> getCateByLevel(){
         return productCatService.getCateByLevel();
     };
+
 
 
 

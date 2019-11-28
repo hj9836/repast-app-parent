@@ -21,6 +21,6 @@ public interface ProductCatMapper extends Mapper<ProductCat> {
 
     List<ProductCat> getCateByLevel();
 
-    List<Long>   selectProductCatByShopId(Long shopId);
+    List<Long>  selectProductCatByShopId(Long shopId);
 
 }

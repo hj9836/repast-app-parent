@@ -6,10 +6,7 @@ import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
-import com.huifangyuan.app.vo.CategoryShop;
-import com.huifangyuan.app.vo.MemberProduct;
-import com.huifangyuan.app.vo.ProductVo;
-import com.huifangyuan.app.vo.ShopInfoVo;
+import com.huifangyuan.app.vo.*;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,7 +39,7 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public List<IntegralMall> getProductInfoByIntegral() {
+            public List<MemberProduct> getProductInfoByIntegral(Integer pageNum,Integer pageSize) {
                 System.out.println("查询支持用积分兑换的商品信息");
                 return null;
             }
@@ -169,6 +166,11 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             @Override
             public MemberProduct getProductInfoByPrimaryKey(Long productId) {
                 System.out.println("进入"+"根据主键查询商品信息"+"熔断方法");
+                return null;
+            }
+            @Override
+            public List<AdvertiseVo> getAdvertise() {
+                System.out.println("进入"+"首页广告推荐"+"熔断方法");
                 return null;
             }
         };

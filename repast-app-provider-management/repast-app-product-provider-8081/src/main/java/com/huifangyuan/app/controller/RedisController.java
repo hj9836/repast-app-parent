@@ -2,6 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.*;
+import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,14 +27,16 @@ public class RedisController {
     private ProductCatService productCatService;
 
     @Autowired
-    MyRedisService myRedisService;
+    private MyRedisService myRedisService;
 
     @Autowired
-    RedisService redisService;
+    private RedisService redisService;
 
     @Autowired
-    ProductInfoService productInfoService;
+    private ProductInfoService productInfoService;
 
+    @Autowired
+    private ShopInfoService shopInfoService;
     @PostMapping ("/insertAllProductToRedis")
     public boolean insertAllProductToRedis(){
         return myRedisService.insertAllProductToRedis(redisService);
@@ -97,5 +100,11 @@ public class RedisController {
 
 
         return productInfoService.getRecommandProduct(pageNum,pageSize,redisService,myRedisService);
+    }
+
+    @GetMapping ("/getAdvertise")
+    public List<AdvertiseVo> getAdvertise(){
+
+        return shopInfoService.getAdvertise();
     }
 }

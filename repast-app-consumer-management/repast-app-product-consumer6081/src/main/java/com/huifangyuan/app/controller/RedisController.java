@@ -127,6 +127,17 @@ public class RedisController extends BaseController {
         return failed();
     }
 
+    @GetMapping("/getAdvertise")
+    @ApiOperation(value = "首页广告轮播功能",notes = "首页广告轮播功能，联查sms_advertise和sms_advertise_position")
+    public ResultData getAdvertise(){
+
+
+        if (null!=repastService.getAdvertise()){
+
+            return success(repastService.getAdvertise());
+        }
+        return failed();
+    }
 
 
 }

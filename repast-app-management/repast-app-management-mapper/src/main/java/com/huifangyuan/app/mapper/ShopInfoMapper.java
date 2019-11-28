@@ -1,5 +1,6 @@
 package com.huifangyuan.app.mapper;
 
+import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import tk.mybatis.mapper.common.Mapper;
 
@@ -15,4 +16,6 @@ public interface ShopInfoMapper {
     List<ShopInfoVo> getAllShopInfo();
 
     ShopInfoVo getShopAllInfoByShopId(Long shopId);
+
+    List<AdvertiseVo> getAdvertise();
 }

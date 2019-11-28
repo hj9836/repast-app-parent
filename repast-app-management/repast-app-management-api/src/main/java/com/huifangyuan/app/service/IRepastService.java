@@ -6,10 +6,7 @@ import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
-import com.huifangyuan.app.vo.CategoryShop;
-import com.huifangyuan.app.vo.MemberProduct;
-import com.huifangyuan.app.vo.ProductVo;
-import com.huifangyuan.app.vo.ShopInfoVo;
+import com.huifangyuan.app.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -48,7 +45,8 @@ public interface IRepastService {
      * Regina
      */
     @GetMapping("/getProductInfoByIntegral")
-    List<IntegralMall> getProductInfoByIntegral();
+    List<MemberProduct> getProductInfoByIntegral(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize);
+
 
 
     /**
@@ -225,6 +223,8 @@ public interface IRepastService {
     @GetMapping ("/getProductInfoByPrimaryKey")
     MemberProduct getProductInfoByPrimaryKey(@RequestParam(value = "productId") Long productId);
 
+    @GetMapping ("/getAdvertise")
+    List<AdvertiseVo> getAdvertise();
 
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 

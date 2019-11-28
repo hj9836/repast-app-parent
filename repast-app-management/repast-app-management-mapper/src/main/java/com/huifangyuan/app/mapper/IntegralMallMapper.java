@@ -1,8 +1,10 @@
 package com.huifangyuan.app.mapper;
 
 import com.huifangyuan.app.domain.IntegralMall;
+import com.huifangyuan.app.vo.MemberProduct;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Regina
@@ -15,5 +17,8 @@ public interface IntegralMallMapper {
      * 查询支持用积分兑换的商品信息
      * @return
      */
-    List<IntegralMall> getProductInfoByIntegral();
+    List<MemberProduct> getProductInfoByIntegral(Map<String,Integer> map);
+
+    List<Long> getProductIdByIntegral(Map<String,Integer> map);
+
 }

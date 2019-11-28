@@ -45,8 +45,12 @@
         <result column="detail_html" property="detailHtml" jdbcType="LONGVARCHAR" />
         <result column="detail_mobile_html" property="detailMobileHtml" jdbcType="LONGVARCHAR" />
     </resultMap>
-    <select id="getProductInfoByIntegral" resultType="com.huifangyuan.app.domain.IntegralMall">
-SELECT p.name , p.pic , p.price price , p.promotion_price promotionPrice , p.promotion_type promotionType
-from pms_product p where p.currency = 1 and p.delete_status = 0 and p.publish_status=1
+    <select id="getProductInfoByIntegral" parameterType="java.lang.Integer" resultType="com.huifangyuan.app.vo.MemberProduct">
+SELECT p.name , p.pic , p.price , p.promotion_price promotionPrice , p.promotion_type promotionType
+from pms_product p where p.currency = 1 and p.delete_status = 0 and p.publish_status=1 LIMIT ${startNum},${pageSize}
+  </select>
+    <select id="getProductIdByIntegral" parameterType="java.lang.Integer" resultType="com.huifangyuan.app.vo.MemberProduct">
+SELECT p.id
+from pms_product p where p.currency = 1 and p.delete_status = 0 and p.publish_status=1 LIMIT ${startNum},${pageSize}
   </select>
 </mapper>

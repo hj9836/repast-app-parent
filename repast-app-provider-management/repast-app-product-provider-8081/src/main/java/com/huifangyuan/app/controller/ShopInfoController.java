@@ -2,7 +2,9 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
+import com.huifangyuan.app.mapper.ShopInfoMapper;
 import com.huifangyuan.app.service.*;
+import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.ProductVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class ShopInfoController {
 
     @Autowired
     private MyRedisService myRedisService;
+
+    @Autowired
+    private ShopInfoMapper shopInfoMapper;
 
 
     @GetMapping("/getShopInfoByPrimaryKey")
@@ -91,4 +96,10 @@ public class ShopInfoController {
         return shopInfoService.getShopAllInfoByShopId(shopId);
     }
 
+    public List<AdvertiseVo> getAdvertise(){
+
+        return shopInfoMapper.getAdvertise();
+    }
 }
+
+

@@ -4,10 +4,12 @@ import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
 import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.service.IRepastService;
+import com.huifangyuan.app.vo.MemberProduct;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -31,8 +33,8 @@ public class IntegralMallController extends BaseController {
      */
     @ApiOperation(value = "积分商城",notes = "查询支持用积分兑换的商品信息")
     @GetMapping("/getProductInfoByIntegral")
-    public ResultData getProductInfoByIntegral(){
-        List<IntegralMall> proInfo = iRepastService.getProductInfoByIntegral();
+    public ResultData getProductInfoByIntegral(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
+        List<MemberProduct> proInfo = iRepastService.getProductInfoByIntegral(pageNum,pageSize);
         if (null != proInfo){
             return success(proInfo);
         }else{
