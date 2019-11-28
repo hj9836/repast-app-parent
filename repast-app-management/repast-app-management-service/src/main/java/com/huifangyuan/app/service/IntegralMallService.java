@@ -3,6 +3,7 @@ package com.huifangyuan.app.service;
 import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.mapper.IntegralMallMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @project repast-app-parent
  * @declaration:
  */
+@Service
 public class IntegralMallService {
     @Autowired
     private IntegralMallMapper integralMallMapper;
