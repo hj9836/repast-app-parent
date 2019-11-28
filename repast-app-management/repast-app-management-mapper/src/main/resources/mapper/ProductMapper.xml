@@ -61,8 +61,8 @@
         AND currency = 0
         AND stock > 0
         AND shop_id = #{shopId}
-        AND `name` LIKE '%'||#{name}||'%'
-        AND keywords LIKE '%'||#{keywords}||'%'
+        AND `name` like #{name}
+        AND keywords like #{keywords}
     </select>
     <select id="getIntegralProduct" resultType="com.huifangyuan.app.domain.Product">
         SELECT
