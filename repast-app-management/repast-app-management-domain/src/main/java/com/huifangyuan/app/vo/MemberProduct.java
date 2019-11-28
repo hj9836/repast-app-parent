@@ -38,5 +38,7 @@ public class MemberProduct implements Serializable {
     private String promotionPrice;
     @Column(name = "gift_point")
     private Long giftPoint;
+    private Integer pageNuml;
+    private Integer pageSize;
 
 }

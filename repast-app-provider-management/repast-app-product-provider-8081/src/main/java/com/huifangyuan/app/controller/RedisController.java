@@ -55,7 +55,7 @@ public class RedisController {
      **/
     @PostMapping ("/insertAllProductCatToRedis")
     public boolean insertAllProductCatToRedis(){
-        return myRedisService.insertAllProductToRedis(redisService);
+        return shopmenuRedisService.insertAllProductCatToRedis(redisService);
     }
     /**
      *@ClassName RedisController
