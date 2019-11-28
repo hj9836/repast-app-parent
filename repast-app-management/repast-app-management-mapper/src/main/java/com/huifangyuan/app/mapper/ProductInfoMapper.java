@@ -1,6 +1,7 @@
 package com.huifangyuan.app.mapper;
 
 import com.huifangyuan.app.domain.Product;
+import com.huifangyuan.app.vo.CanTeenDateVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import tk.mybatis.mapper.common.Mapper;
@@ -72,5 +73,7 @@ public interface ProductInfoMapper extends Mapper<Product> {
     List<MemberProduct> getProductListByPrimaryKeyList(Map<String,List<Long>> list);
 
     MemberProduct getProductInfoByPrimaryKey(Long productId);
+
+    List<CanTeenDateVo> getCanteenDateByShopId(Long shopId);
 
 }

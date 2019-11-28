@@ -47,6 +47,24 @@
         <result column="detail_html" property="detailHtml" jdbcType="LONGVARCHAR"/>
         <result column="detail_mobile_html" property="detailMobileHtml" jdbcType="LONGVARCHAR"/>
     </resultMap>
+
+
+    <resultMap id="CanteenDataMap" type="com.huifangyuan.app.vo.CanTeenDateVo">
+        <result column="catId" property="catId" jdbcType="BIGINT"/>
+        <result column="catName" property="catName" jdbcType="VARCHAR"/>
+        <collection property="data" ofType="com.huifangyuan.app.vo.MemberProduct">
+            <result column="id" property="productId" jdbcType="BIGINT"/>
+            <result column="name" property="name" jdbcType="VARCHAR"/>
+            <result column="pic" property="pic" jdbcType="VARCHAR"/>
+            <result column="price" property="price" jdbcType="DECIMAL"/>
+            <result column="promotion_price" property="promotionPrice" jdbcType="DECIMAL"/>
+            <result column="member_price" property="memberPrice" jdbcType="DECIMAL"/>
+        </collection>
+
+
+
+
+    </resultMap>
     <select id="getProductByShopId" resultType="com.huifangyuan.app.domain.Product">
     select pp.* from pms_product pp
      inner join pms_sku_stock pss on pp.id = pss.product_id
@@ -99,7 +117,7 @@
 
     <select id="getProductListByPrimaryKeyList" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
 
-        SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType from pms_product p
+        SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price from pms_product p LEFT JOIN pms_member_price m on p.id = m.product_id
         <foreach collection="list" item="id" open="where p.id in(" close=")" separator=",">
             #{id}
         </foreach>
@@ -109,6 +127,16 @@
     <select id="getProductInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
     SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p
     LEFT JOIN pms_member_price m ON p.id=m.product_id where p.delete_status = 0 and p.publish_status = 1 and p.id = #{productId}
+    </select>
+
+    <select id="getCanteenDateByShopId" parameterType="java.lang.Long" resultMap="CanteenDataMap">
+
+    SELECT pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,mp.member_price
+	FROM pms_product p
+	INNER JOIN pms_product_category pc on p.shop_id = pc.shop_id AND p.product_category_id = pc.id
+	LEFT JOIN pms_member_price mp on p.id = mp.product_id
+	WHERE p.shop_id = #{shopId}
+
     </select>
 
 </mapper>

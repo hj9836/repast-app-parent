@@ -4,6 +4,7 @@ import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
+import com.huifangyuan.app.vo.CanTeenDateVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -138,6 +139,20 @@ public class RedisController extends BaseController {
         }
         return failed();
     }
+
+    @GetMapping("/getCanteenDateByShopId")
+    @ApiOperation(value = "根据店铺id查询该店铺的一级菜单以及商品信息",notes = "之前写的查询商品信息不能用了，因为跟前端的格式对不上")
+    public ResultData getCanteenDateByShopId(@RequestParam("shopId") Long ShopId){
+        List<CanTeenDateVo> canteenDateByShopId = repastService.getCanteenDateByShopId(ShopId);
+
+
+        if (null!=canteenDateByShopId){
+
+            return success(canteenDateByShopId);
+        }
+        return failed();
+    }
+
 
 
 }

@@ -33,7 +33,7 @@ public class ProductCatController {
 
     /**
      * 通过层级查询商品类型
-     * @param level
+     * @param
      * @return
      */
     @GetMapping("/getByLevel")

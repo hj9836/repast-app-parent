@@ -226,6 +226,9 @@ public interface IRepastService {
     @GetMapping ("/getAdvertise")
     List<AdvertiseVo> getAdvertise();
 
+    @GetMapping ("/getCanteenDateByShopId")
+    List<CanTeenDateVo> getCanteenDateByShopId(@RequestParam("shopId") Long ShopId);
+
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/
 
 

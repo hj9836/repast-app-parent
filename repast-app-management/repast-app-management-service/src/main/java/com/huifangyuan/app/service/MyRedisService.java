@@ -86,7 +86,6 @@ public class MyRedisService {
 
                     product_JSON = redisService.get(REDIS_PRODUCT_KEY+list.get(i));//PREFIX_PRODUCT为redis中商品数据的KEY值固定前缀，使用静态常量解决硬编码
 
-
                 //然后把字符串类型的JSON数据转换成Product实体类对象
                 //考虑脏读问题，有可能查询的瞬间商家把该商品删除了，此处要做Redis返回数据的非空判断
                 if(""!=product_JSON || product_JSON!=null){

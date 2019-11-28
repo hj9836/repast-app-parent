@@ -173,6 +173,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 System.out.println("进入"+"首页广告推荐"+"熔断方法");
                 return null;
             }
+
+            @Override
+            public List<CanTeenDateVo> getCanteenDateByShopId(Long ShopId) {
+                System.out.println("进入"+"全组最屌的"+"熔断方法");
+                return null;
+            }
         };
         return repastService;
     }

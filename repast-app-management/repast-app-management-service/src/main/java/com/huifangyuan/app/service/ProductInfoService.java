@@ -7,6 +7,7 @@ import com.huifangyuan.app.mapper.ProductCatMapper;
 import com.huifangyuan.app.mapper.ProductInfoMapper;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
 import com.huifangyuan.app.utils.JSONUtil;
+import com.huifangyuan.app.vo.CanTeenDateVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -174,6 +175,7 @@ public class ProductInfoService extends BaseService<Product> {
             return productListByPrimayKeyFromRedis;
         }
 
+        System.out.println(getProductListByPrimaryKeyList(list).get(0).getMemberPrice());
         return getProductListByPrimaryKeyList(list);
     }
 
@@ -188,6 +190,10 @@ public class ProductInfoService extends BaseService<Product> {
 
     }
 
+    public List<CanTeenDateVo> getCanteenDateByShopId(Long ShopId){
+
+        return productInfoMapper.getCanteenDateByShopId(ShopId);
+    }
 
 
 
