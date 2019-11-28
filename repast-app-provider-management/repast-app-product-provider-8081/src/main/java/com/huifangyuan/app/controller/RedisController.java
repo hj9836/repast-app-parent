@@ -94,7 +94,7 @@ public class RedisController {
         return myRedisService.insertAllShopInfoToRedis(redisService);
     }
 
-    @PostMapping("/getRecommandProduct")
+    @GetMapping("/getRecommandProduct")
     public List<MemberProduct> getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
 
 

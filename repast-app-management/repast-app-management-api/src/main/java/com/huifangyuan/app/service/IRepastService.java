@@ -217,7 +217,7 @@ public interface IRepastService {
     @PostMapping("/insertAllShopInfoToRedis")
     boolean insertAllShopInfoToRedis();
 
-    @PostMapping("/getRecommandProduct")
+    @GetMapping("/getRecommandProduct")
     List<MemberProduct> getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize);
 
     @GetMapping ("/getProductInfoByPrimaryKey")

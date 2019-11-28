@@ -115,7 +115,7 @@ public class RedisController extends BaseController {
         return failed();
     }
 
-    @PostMapping("/getRecommandProduct")
+    @GetMapping("/getRecommandProduct")
     @ApiOperation(value = "获取热门商品",notes = "首页页面上的，获取热门商品功能")
     public ResultData getRecommandProduct(@RequestParam("pageNum") Integer pageNum,@RequestParam("pageSize") Integer pageSize){
         List<MemberProduct> p = repastService.getRecommandProduct(pageNum,pageSize);
