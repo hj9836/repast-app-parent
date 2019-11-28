@@ -60,9 +60,8 @@
         AND publish_status = 1
         AND currency = 0
         AND stock > 0
-				AND shop_id =#{shopId}
-        and `name` LIKE #{name}
-        and	keywords LIKE #{keywords}
+	AND shop_id =#{shopId}
+        AND concat(`name`,',',keywords) like #{name}
     </select>
     <select id="getIntegralProduct" resultType="com.huifangyuan.app.domain.Product">
         SELECT
