@@ -15,11 +15,4 @@ import java.io.Serializable;
 public class ProductVo implements Serializable {
     private Long shopId;
     private String name;
-    private String keywords;
-
-    private String price;
-    @Column(name = "promotion_price")
-    private String promotionPrice;
-    private String sale;
-    private String description;
 }
