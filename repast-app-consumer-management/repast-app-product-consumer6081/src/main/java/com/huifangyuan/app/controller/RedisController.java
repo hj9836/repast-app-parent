@@ -104,7 +104,7 @@ public class RedisController extends BaseController {
 
 
     @PostMapping("/insertAllShopInfoToRedis")
-    @ApiOperation(value = "将全部商品存入redis",notes = "key为静态常量+product_id，value为该商品的全部数据+member_price联查")
+    @ApiOperation(value = "将全部店铺信息存入redis",notes = "key为静态常量+shop_id，value为该ShioInfoVo类")
     public ResultData insertAllShopInfoToRedis(){
 
 
@@ -126,4 +126,7 @@ public class RedisController extends BaseController {
         }
         return failed();
     }
+
+
+
 }
