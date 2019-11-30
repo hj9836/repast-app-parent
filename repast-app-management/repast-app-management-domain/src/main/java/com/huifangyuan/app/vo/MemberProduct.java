@@ -46,7 +46,7 @@ public class MemberProduct implements Serializable {
     @Column(name = "promotion_price")
     private BigDecimal promotionPrice;
     @Column(name = "member_price")
-    private BigDecimal  memberPrice;
+    private BigDecimal memberPrice;
     /*特别不准使用String类型，因为要和订单组做对接，价格数据为String不符合逻辑*/
 
 }

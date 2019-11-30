@@ -178,9 +178,6 @@ public interface IRepastService {
     @PostMapping("/insertAllProductToRedis")
     boolean insertAllProductToRedis();
 
-
-
-
     @GetMapping("/test")
     List<MemberProduct> test(@RequestParam("ShopId") Long ShopId);
     /**
