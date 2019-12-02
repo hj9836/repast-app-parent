@@ -28,6 +28,12 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
         IRepastService repastService = new IRepastService() {
 
             @Override
+            public String selectToken(String token) {
+                System.out.println("验证用户是否登陆，熔断方法");
+                return null;
+            }
+
+            @Override
             public ShopInfoVo getShopInfoByPrimaryKey(Long ShopId) {
                 System.out.println("进入根据主键查询商铺信息熔断方法");
                 return null;
@@ -119,8 +125,14 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public boolean insertAllProductToRedis() {
-
+                System.out.println("向redis中插入全部商品数据,熔断数据");
                 return false;
+            }
+
+            @Override
+            public List<ProductCat> selectShopMenuByShopIdToRedis(Long shopId) {
+                System.out.println("根据店铺id查询商品类目信息从redis中,熔断数据");
+                return null;
             }
 
             @Override

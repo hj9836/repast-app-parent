@@ -55,13 +55,20 @@ public class ShopInfoController extends BaseController {
      */
     @PostMapping("/selectShopProduct")
     @ApiOperation(value = "商品信息", notes = "通过店铺搜素查询商品列表")
-    public ResultData selectShopProduct(ProductVo productVo){
-        List<Product> products = repastService.selectShopProduct(productVo);
-        if (null != products){
-            return success("搜素成功",products);
-        }else {
+    public ResultData selectShopProduct(ProductVo productVo,String token){
+        if(null != token) {
+            String s = repastService.selectToken(token);
+            if (null != s) {
+                List<Product> products = repastService.selectShopProduct(productVo);
+                if (null != products) {
+                    return success("搜索成功", products);
+                } else {
+                    return failed();
+                }
+            }
             return failed();
         }
+        return failed();
     }
     /**
      * @Author 闫增健
