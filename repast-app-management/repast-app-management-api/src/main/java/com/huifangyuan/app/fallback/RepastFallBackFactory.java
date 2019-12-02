@@ -105,6 +105,11 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return null;
             }
 
+            @Override
+            public ShopInfoVo getShopAllInfoByShopId(Long shopId) {
+                return null;
+            }
+
 
             @Override
             public List<MemberProduct> getAllProductByShopId(Long shopId) {
@@ -124,11 +129,6 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return false;
             }
 
-            @Override
-            public List<ProductCat> selectShopMenuByShopIdToRedis(Long shopId) {
-                System.out.println("根据店铺id查询商品类目信息从redis中,熔断数据");
-                return null;
-            }
 
             @Override
             public List<MemberProduct> test(Long ShopId) {
@@ -141,22 +141,10 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return false;
             }
 
-            /**
-             * @param shopId
-             * @ClassName RedisController
-             * @Description
-             * @Date 21:03 2019/11/26
-             * @author eric
-             * 根据店铺id查询商品类目信息从redis中
-             * @Param
-             * @Return
-             */
             @Override
-            public List<ProductCat> selectShopMenuByShopIdToRedis(Long shopId) {
-                System.out.println("根据店铺id查询商品类目信息从redis中");
+            public List<ProductCat> selectProductCatByshopIdToRedis(Long shopId) {
                 return null;
             }
-
 
             @Override
             public boolean insertZeroCatToRedis() {

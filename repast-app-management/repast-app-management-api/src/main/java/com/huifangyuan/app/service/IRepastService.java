@@ -9,10 +9,7 @@ import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
 import com.huifangyuan.app.vo.*;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,7 +26,8 @@ import java.util.List;
  **/
 @FeignClient(value = "product-interface-provider", fallbackFactory = RepastFallBackFactory.class)
 public interface IRepastService {
-
+    @GetMapping("/token")
+    String selectToken(@RequestParam("token") String token);
     /*-------------------------------------shopController-----------------------------------------------------*/
     @GetMapping("/getShopInfoByPrimaryKey")
     ShopInfoVo getShopInfoByPrimaryKey(@RequestParam("ShopId") Long ShopId);

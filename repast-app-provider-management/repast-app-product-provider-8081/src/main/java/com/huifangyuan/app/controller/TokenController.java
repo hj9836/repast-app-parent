@@ -2,7 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.service.TokenService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +15,7 @@ public class TokenController {
      * @param token
      * @return
      */
-    @RequestMapping("/token")
+    @GetMapping("/token")
     public String selectToken(@RequestParam("token") String token){
         return tokenService.selectToken(token);
     }
