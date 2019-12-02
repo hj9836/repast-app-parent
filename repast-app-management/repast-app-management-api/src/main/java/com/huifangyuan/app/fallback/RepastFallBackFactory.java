@@ -28,12 +28,6 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
         IRepastService repastService = new IRepastService() {
 
             @Override
-            public String selectToken(String token) {
-                System.out.println("验证用户是否登陆，熔断方法");
-                return null;
-            }
-
-            @Override
             public ShopInfoVo getShopInfoByPrimaryKey(Long ShopId) {
                 System.out.println("进入根据主键查询商铺信息熔断方法");
                 return null;
@@ -105,11 +99,6 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return null;
             }
 
-            @Override
-            public ShopInfoVo getShopAllInfoByShopId(Long shopId) {
-                return null;
-            }
-
 
             @Override
             public List<MemberProduct> getAllProductByShopId(Long shopId) {
@@ -125,10 +114,9 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public boolean insertAllProductToRedis() {
-                System.out.println("向redis中插入全部商品数据,熔断数据");
+
                 return false;
             }
-
 
             @Override
             public List<MemberProduct> test(Long ShopId) {
@@ -141,10 +129,22 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return false;
             }
 
+            /**
+             * @param shopId
+             * @ClassName RedisController
+             * @Description
+             * @Date 21:03 2019/11/26
+             * @author eri c
+             * 根据店铺id查询商品类目信息从redis中
+             * @Param
+             * @Return
+             */
             @Override
-            public List<ProductCat> selectProductCatByshopIdToRedis(Long shopId) {
+            public List<ProductCat> selectShopMenuByShopIdToRedis(Long shopId) {
+                System.out.println("根据店铺id查询商品类目信息从redis中");
                 return null;
             }
+
 
             @Override
             public boolean insertZeroCatToRedis() {

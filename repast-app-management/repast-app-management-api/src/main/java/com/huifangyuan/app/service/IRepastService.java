@@ -186,7 +186,7 @@ public interface IRepastService {
      *@Description
      * 查询所有商品类目信息 存入redis
      *@Date 21:17 2019/11/26
-     *@author eric
+     *@author eri c
      *@Param
      *@Return
      **/
@@ -197,7 +197,7 @@ public interface IRepastService {
      *@ClassName RedisController
      *@Description
      *@Date 21:03 2019/11/26
-     *@author eric
+     *@author eri c
      * 根据店铺id查询商品类目信息从redis中
      *@Param
      *@Return
