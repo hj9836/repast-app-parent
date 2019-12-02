@@ -38,9 +38,10 @@ public class MyRedisService {
         List<MemberProduct> products_list_mysql = null;
         try {
             products_list_mysql = productInfoMapper.selectAllProductInfo();
-            System.out.println("查看mysql数据长度"+products_list_mysql.size());
+            System.out.println("查看mysql数据长度"+products_list_mysql.size());//这步可能出现空指针异常，故trycatch
         }catch (Exception e){
             e.printStackTrace();
+            return false;
         }
 
 
