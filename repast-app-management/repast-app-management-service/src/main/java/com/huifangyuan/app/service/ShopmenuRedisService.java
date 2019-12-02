@@ -113,39 +113,19 @@ public class ShopmenuRedisService {
 
 
 
-    public List<ProductCat> getProductCatListByPrimayKeyFromRedis (List<Long> list, RedisService redisService){
+    public List<ProductCat> getShopMenuByShopIdFromRedis (Long shopId, RedisService redisService){
         String productCat_JSON = null;
-
-        //首先判断list的长度，如果不为空则查询redis
-        if(0!=list.size() || null!=list){
-            //for循环遍历list数组，用所拿到的Long查询redis中的商品信息
-            List<ProductCat> ProductCatList = new ArrayList<ProductCat>();
-            try {
-            for(int i=0;i<list.size();i++){
-
-                    productCat_JSON = redisService.get(REDIS_SHOPMENU_KEY+list.get(i));//PREFIX_PRODUCT为redis中商品数据的KEY值固定前缀，使用静态常量解决硬编码
-
-
-                //然后把字符串类型的JSON数据转换成Product实体类对象
-                //考虑脏读问题，有可能查询的瞬间商家把该商品删除了，此处要做Redis返回数据的非空判断
-                if(""!=productCat_JSON || productCat_JSON!=null){
-                    // 如果数据不为空，则添加进Product_List中，否则不作任何处理，直接进入下一次循环
-                    ProductCat p = JSONUtil.toObject(productCat_JSON, ProductCat.class);
-                    ProductCatList.add(p);
-                }
-
+        try {
+            String s = redisService.get(REDIS_SHOPMENU_KEY + shopId);
+            if (null!=s && ""!=s){//杀空
+               return JSONUtil.toList(s, ProductCat.class);
             }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-            //for循环结束之后，返回Product_List
-            return ProductCatList;
 
+
+        }catch (Exception e){
+            e.printStackTrace();
         }
-        //如果list长度为空，则返回msg：没有相关商品！
         return null;
-
-
     }
 
 }

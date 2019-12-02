@@ -200,8 +200,8 @@ public interface IRepastService {
      *@Param
      *@Return
      **/
-    @GetMapping ("/selectProductByshopIdToRedis")
-    List<ProductCat> selectProductCatByshopIdToRedis(@RequestParam(value = "shopId") Long shopId);
+    @GetMapping ("/selectShopMenuByShopIdToRedis")
+    List<ProductCat> selectShopMenuByShopIdToRedis(@RequestParam(value = "shopId") Long shopId);
 
     @GetMapping("/insertZeroCatToRedis")
     boolean insertZeroCatToRedis();
