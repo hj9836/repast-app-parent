@@ -33,13 +33,19 @@ public class SearchController extends BaseController {
      */
     @GetMapping("/homeSeekProduct")
     @ApiOperation(value = "首页搜索" , notes = "首页搜索商品列表")
-    public ResultData homeSeekProduct(String keywords){
-        List<Product> products = repastService.homeSeekProduct(keywords);
-        if (products.size() > 0){
-            return success(products);
-        }else{
-            return failed();
+    public ResultData homeSeekProduct(String keywords , String token){
+
+        if (null != token){
+            String s = repastService.selectToken(token);
+            if (null != s){
+                List<Product> products = repastService.homeSeekProduct(keywords);
+                if (products.size() > 0){
+                    return success(products);
+                }
+            }
         }
+        return failed();
+
     }
 
 

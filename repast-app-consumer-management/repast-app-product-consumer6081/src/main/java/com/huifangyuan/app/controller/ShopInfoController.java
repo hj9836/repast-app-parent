@@ -91,19 +91,25 @@ public class ShopInfoController extends BaseController {
      */
     @GetMapping("/getShopCommentById")
     @ApiOperation(value = "查询店铺评价" , notes = "通过主键查询商家全部评价" )
-    public ResultData getShopCommentById(Long shopId){
-        List<Comment> shopCommentById = repastService.getShopCommentById(shopId);
-        if (null != shopCommentById){
-            return success(shopCommentById);
-        }else {
-            return failed();
+    public ResultData getShopCommentById(Long shopId , String token){
+
+        if (null != token){
+            String s = repastService.selectToken(token);
+            if (null != s){
+                List<Comment> shopCommentById = repastService.getShopCommentById(shopId);
+                if (null != shopCommentById){
+                    return success(shopCommentById);
+                }
+            }
         }
+        return failed();
+
     }
 
     /**
      * @description
      *      通过店铺主键查询商品列表
-     * @param [shopId]
+     * @param
      * @date 2019/11/21
      * @return java.util.List<com.aaa.lee.app.domain.Product>
      * @throws
