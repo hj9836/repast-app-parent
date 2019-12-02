@@ -69,10 +69,10 @@
 
 
     </resultMap>
+
     <select id="getProductByShopId" resultType="com.huifangyuan.app.domain.Product">
-    select pp.* from pms_product pp
-     inner join pms_sku_stock pss on pp.id = pss.product_id
-    where pp.delete_status = 0 and pp.publish_status = 1 and pss.stock > 0 and pp.shop_id = #{shopId}
+    SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,p.description,m.member_price memberPrice from pms_product p
+    LEFT JOIN pms_member_price m ON p.id=m.product_id where p.delete_status = 0 and p.publish_status = 1 and p.shop_id= #{shopId}
     </select>
     <select id="getProductByCategoryId" resultType="com.huifangyuan.app.domain.Product">
 
@@ -128,19 +128,16 @@
 
     </select>
 
-    <select id="getProductInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
+    <select id="getProduc   tInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
     SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,p.description,m.member_price memberPrice from pms_product p
     LEFT JOIN pms_member_price m ON p.id=m.product_id where p.delete_status = 0 and p.publish_status = 1 and p.id=#{productId}
     </select>
 
     <select id="getCanteenDateByShopId" parameterType="java.lang.Long" resultMap="CanteenDataMap">
-
-   SELECT pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,p.sale,mp.member_price,p.description,p.promotion_type
+    SELECT pc.id catId,pc.`name` catName,p.id,p.`name`,p.pic,p.price,p.promotion_price,p.sale,mp.member_price,p.description,p.promotion_type
 	FROM pms_product p
 	INNER JOIN pms_product_category pc on p.shop_id = pc.shop_id AND p.product_category_id = pc.id
 	LEFT JOIN pms_member_price mp on p.id = mp.product_id
 	WHERE p.shop_id = #{shopId}
-
     </select>
-
 </mapper>

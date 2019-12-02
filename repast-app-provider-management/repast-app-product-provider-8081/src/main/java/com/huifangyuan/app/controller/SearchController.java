@@ -31,7 +31,7 @@ public class SearchController {
     public List<Product> homeSeekProduct(@RequestParam("keywords") String keywords){
         List<Product> products = searchService.HomeSeekProduct(keywords);
         return products;
-    };
+    }
 
 
 
