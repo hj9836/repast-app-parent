@@ -89,10 +89,10 @@ SELECT a.id,a.shop_id shopId,a.name,a.pic,a.start_time startTime,a.end_time endT
     </select>
 
     <select id="getShopAllInfoLAOYANG" parameterType="java.lang.Long" resultMap="ShopInfoMap">
- SELECT i.id,i.`name`,i.province,i.city,i.borough,i.address,i.lng,i.lat,i.closed,i.open_time openTime,i.phone,i.images,i.`status`,i.auth_start_time authStartTime,i.auth_long authLong,f.title,f.description,f.icon
+ SELECT i.id,i.`name`,i.province,i.city,i.borough,i.address,i.lng,i.lat,i.closed,i.open_time,i.phone,i.images,i.`status`,i.auth_start_time authStartTime,i.auth_long authLong,f.title,f.description,f.icon
  from ums_shop_information i
 	LEFT JOIN ums_shop_facility f on i.id = f.shop_id
-	where i.id = 1
+	where i.id = #{shopId}
     </select>
 
 </mapper>

@@ -16,14 +16,14 @@
     <result column="keywords" property="keywords" jdbcType="VARCHAR" />
     <result column="description" property="description" jdbcType="LONGVARCHAR" />
   </resultMap>
-    <select id="selectProductCatByshopId" resultType="com.huifangyuan.app.domain.ProductCat">
-      select * from pms_product_category where shop_id=#{shopId}
+    <select id="selectProductCatByshopId" resultMap="BaseResultMap">
+      select * from pms_product_category where `level`=1 and shop_id=#{shopId}
     </select>
   <select id="selectProductCatByShopId" resultType="java.lang.Long">
     select p.parent_id from pms_product_category p where shop_id=#{shopId}
   </select>
-  <select id="selectAllProductCat" resultType="com.huifangyuan.app.domain.ProductCat">
-    select * from pms_product_category
+  <select id="selectAllProductCat" resultMap="BaseResultMap">
+   select * from pms_product_category WHERE `level` = 1 ORDER BY shop_id DESC
   </select>
   <select id="getCateByLevel" resultType="com.huifangyuan.app.domain.ProductCat">
     SELECT name from pms_product_category where level=0

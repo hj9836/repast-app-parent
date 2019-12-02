@@ -63,10 +63,10 @@ public class RedisController extends BaseController {
         }
         return failed();
     }
-    @GetMapping("/selectProductCatToRedis")
+    @GetMapping("/selectShopMenuByShopIdToRedis")
     @ApiOperation(value = "商品类目",notes = "根据店铺id获取所有的商品类目信息")
     public ResultData selectProductCatToRedis(Long shopId){
-        List<ProductCat> productCatList = repastService.selectProductCatByshopIdToRedis(shopId);
+        List<ProductCat> productCatList = repastService.selectShopMenuByShopIdToRedis(shopId);
         if (null !=productCatList && productCatList.size()>0){
             return success(productCatList);
         }

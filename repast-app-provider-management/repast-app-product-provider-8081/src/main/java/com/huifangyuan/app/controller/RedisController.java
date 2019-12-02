@@ -70,10 +70,10 @@ public class RedisController {
      *@Param
      *@Return
      **/
-    @GetMapping ("/selectProductByshopIdToRedis")
-    public List<ProductCat> selectProductCatByshopIdToRedis(@RequestParam(value = "shopId") Long shopId){
+    @GetMapping ("/selectShopMenuByShopIdToRedis")
+    public List<ProductCat> selectShopMenuByShopIdToRedis(@RequestParam(value = "shopId") Long shopId){
 
-        return productCatService.selectProductCatByshopIdToRedis(shopId,redisService,shopmenuRedisService);
+        return productCatService.selectShopMenuByShopIdToRedis(shopId,redisService,shopmenuRedisService);
     }
 
     @GetMapping ("/insertZeroCatToRedis")

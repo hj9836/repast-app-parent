@@ -33,6 +33,8 @@ public class ProductCatService extends BaseService<ProductCat> {
     };
 
     public List<ProductCat> selectProductByshopid(Long shopId){
+        //先走redis查询：
+
         List<ProductCat> productCats = productCatMapper.selectProductCatByshopId(shopId);
         if ((productCats.size()>0)){
             return productCats;
@@ -48,18 +50,22 @@ public class ProductCatService extends BaseService<ProductCat> {
      *@Param
      *@Return
      **/
-    public List<ProductCat>  selectProductCatByshopIdToRedis(Long shopId, RedisService redisService, ShopmenuRedisService shopmenuRedisService){
-        //原来的方法返回的是List<ProductCat>,现在改为List<Long>
-        List<Long> productCat_list = productCatMapper.selectProductCatByShopId(shopId);
-        //然后调用我这个方法——>getProductListByPrimayKeyFromRedis 把查询到的List<Long>传入即可
-        List<ProductCat> productCatListByPrimayKeyFromRedis = shopmenuRedisService.getProductCatListByPrimayKeyFromRedis(productCat_list, redisService);
-        if (null!=productCatListByPrimayKeyFromRedis || 0==productCatListByPrimayKeyFromRedis.size()){
-            //如果redis挂了，或者查询到的值为空，则执行原来所写的代码即可
-            List<ProductCat> productCatList = productCatMapper.selectProductCatByshopId(shopId);
-            return productCatList;
-        }
+    public List<ProductCat> selectShopMenuByShopIdToRedis(Long shopId, RedisService redisService, ShopmenuRedisService shopmenuRedisService){
 
-        return productCatListByPrimayKeyFromRedis;
+        List<ProductCat> productCatListByPrimayKeyFromRedis = shopmenuRedisService.getShopMenuByShopIdFromRedis(shopId, redisService);
+        try {//预防空指针异常
+            if (null!=productCatListByPrimayKeyFromRedis || 0!=productCatListByPrimayKeyFromRedis.size()){
+                return productCatListByPrimayKeyFromRedis;
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        //如果redis挂了，或者查询到的值为空，则执行原来所写的代码即可
+        List<ProductCat> productCatList = productCatMapper.selectProductCatByshopId(shopId);
+        return productCatList;
+
     }
 
 

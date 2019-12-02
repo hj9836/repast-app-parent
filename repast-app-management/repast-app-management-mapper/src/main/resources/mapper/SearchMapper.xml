@@ -5,6 +5,6 @@
 
     <select id="HomeSeekProduct" resultType="com.huifangyuan.app.domain.Product" parameterType="String">
         SELECT * from pms_product WHERE delete_status = 0 AND publish_status = 1 AND stock > 0
-        AND concat(`name`,',',keywords,',',product_category_name) like #{keywords}
+        AND concat(`name`,',',keywords,',',product_category_name) like #{keywords}/*%在service层加了*/
     </select>
 </mapper>
