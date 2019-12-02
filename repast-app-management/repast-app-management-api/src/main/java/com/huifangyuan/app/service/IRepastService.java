@@ -147,8 +147,7 @@ public interface IRepastService {
      * @param shopId
      * @return
      */
-    @GetMapping("/getShopAllInfo")
-    ShopInfoVo getShopAllInfoByShopId(@RequestParam("shopId") Long shopId);
+
 
     /**
      * 根据店铺ID查询所有的商品

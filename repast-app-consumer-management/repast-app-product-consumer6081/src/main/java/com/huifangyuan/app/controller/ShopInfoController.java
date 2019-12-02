@@ -92,23 +92,7 @@ public class ShopInfoController extends BaseController {
             return failed();
         }
     }
-    /**
-     * 通过店铺的ID查询到当前店铺的详细信息
-     * <>霍晨亮</>
-     * @param shopId
-     * @return
-     */
-    @GetMapping("/getShopAllInfo")
-    @ApiOperation(value = "店铺的详细信息",notes = "通过店铺的ID查询到当前店铺的详细信息")
-    public ResultData getShopAllInfoByShop(Long shopId){
-        ShopInfoVo shopAllInfoByShop = repastService.getShopAllInfoByShopId(shopId);
-        if (null != shopAllInfoByShop){
-            Map<String, Object> map = new HashMap<String, Object>();
-            map.put("shop",shopAllInfoByShop);
-            return success(map);
-        }
-        return null;
-    }
+
     /**
      * @description
      *      通过店铺主键查询商品列表
