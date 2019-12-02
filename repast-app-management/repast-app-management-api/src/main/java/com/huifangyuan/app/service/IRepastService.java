@@ -26,6 +26,11 @@ import java.util.List;
  **/
 @FeignClient(value = "product-interface-provider", fallbackFactory = RepastFallBackFactory.class)
 public interface IRepastService {
+
+
+    @GetMapping ("/selectShopMenuByShopIdToRedis")
+    List<ProductCat> selectShopMenuByShopIdToRedis(@RequestParam(value = "shopId") Long shopId);
+
     @GetMapping("/token")
     String selectToken(@RequestParam("token") String token);
     /*-------------------------------------shopController-----------------------------------------------------*/

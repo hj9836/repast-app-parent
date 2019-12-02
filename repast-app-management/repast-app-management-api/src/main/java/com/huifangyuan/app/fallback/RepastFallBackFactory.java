@@ -28,6 +28,11 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
         IRepastService repastService = new IRepastService() {
 
             @Override
+            public String selectToken(String token) {
+                return null;
+            }
+
+            @Override
             public ShopInfoVo getShopInfoByPrimaryKey(Long ShopId) {
                 System.out.println("进入根据主键查询商铺信息熔断方法");
                 return null;
@@ -99,6 +104,18 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return null;
             }
 
+            /**
+             * 根据店铺的ID查询店铺的所有信息
+             * Mrlin119
+             *
+             * @param shopId
+             * @return
+             */
+            @Override
+            public ShopInfoVo getShopAllInfoByShopId(Long shopId) {
+                return null;
+            }
+
 
             @Override
             public List<MemberProduct> getAllProductByShopId(Long shopId) {
@@ -127,6 +144,21 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             public boolean insertAllProductCatToRedis() {
                 System.out.println("查询所有商品类目信息 存入redis");
                 return false;
+            }
+
+            /**
+             * @param shopId
+             * @ClassName RedisController
+             * @Description
+             * @Date 21:03 2019/11/26
+             * @author eri c
+             * 根据店铺id查询商品类目信息从redis中
+             * @Param
+             * @Return
+             */
+            @Override
+            public List<ProductCat> selectProductCatByshopIdToRedis(Long shopId) {
+                return null;
             }
 
             /**
