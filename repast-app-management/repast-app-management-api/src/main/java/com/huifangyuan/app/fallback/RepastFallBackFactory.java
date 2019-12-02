@@ -99,11 +99,6 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
                 return null;
             }
 
-            @Override
-            public ShopInfoVo getShopAllInfoByShopId(Long shopId) {
-                System.out.println("测试店铺信息熔断数据");
-                return null;
-            }
 
             @Override
             public List<MemberProduct> getAllProductByShopId(Long shopId) {
