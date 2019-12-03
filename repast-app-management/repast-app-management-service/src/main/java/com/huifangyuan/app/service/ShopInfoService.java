@@ -25,7 +25,7 @@ public class ShopInfoService {
 
 
 
-    public ShopInfoVo getShopInfoByPrimaryKey(Long ShopId,RedisService redisService,MyRedisService myRedisService) {
+  /*  public ShopInfoVo getShopInfoByPrimaryKey(Long ShopId,RedisService redisService,MyRedisService myRedisService) {
         //首先从redis中获取
         ArrayList<Long> list = new ArrayList<Long>();
         list.add(ShopId);//这里没做方法重载，所以只有一条数据也要添加进list中传入，等待后续优化 //TODO
@@ -41,7 +41,7 @@ public class ShopInfoService {
 
         //否则返回原来的方法
         return shopInfoMapper.getShopInfoByPrimaryKey(ShopId);
-    }
+    }                                   废弃，待删除*/
 
 
     /**
@@ -50,27 +50,21 @@ public class ShopInfoService {
      *
      * @param shopId
      * @return
-     */
+     *//*
     public ShopInfoVo getShopAllInfoByShopId(Long shopId){
         ShopInfoVo shopAllInfoByShop = shopInfoMapper.getShopAllInfoByShopId(shopId);
         return shopAllInfoByShop;
-    }
+    }                               废弃，待删除*/
 
     public List<AdvertiseVo> getAdvertise(){
 
         return shopInfoMapper.getAdvertise();
     }
 
-    public ShopInfoCutom getShopAllInfoLAOYANG(Long shopId,RedisService redisService){
+    public ShopInfoCutom getShopAllInfoLAOYANG(Long shopId,RedisService redisService,MyRedisService myRedisService){
         //先从redis中读取：
-        try {
-            String s = redisService.get(REDIS_SHOP_KEY + shopId);
-            ShopInfoCutom shopInfoCutom = JSONUtil.toObject(s, ShopInfoCutom.class);
-            if (null!=shopInfoCutom)return shopInfoCutom;
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }
+        ShopInfoCutom shopInfoCutomByPrimayKeyFromRedis = myRedisService.getShopInfoCutomByPrimayKeyFromRedis(shopId, redisService);
+        if (null!=shopInfoCutomByPrimayKeyFromRedis)return shopInfoCutomByPrimayKeyFromRedis;
 
 
         return shopInfoMapper.getShopAllInfoLAOYANG(shopId);

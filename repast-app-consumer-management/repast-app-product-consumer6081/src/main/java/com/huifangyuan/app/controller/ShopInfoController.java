@@ -33,17 +33,6 @@ public class ShopInfoController extends BaseController {
     @Autowired
     private IRepastService repastService;
 
-    @GetMapping("/getShopInfoByPrimaryKey")
-    @ApiOperation(value = "商家信息",notes = "根据主键获取商家信息")
-    public ResultData getShopInfoByPrimaryKey(@RequestParam("shopId") Long ShopId){
-        HashMap<String, Object> dataMap = new HashMap<String, Object>();
-        if (null!=repastService.getShopInfoByPrimaryKey(ShopId)){
-            System.out.println(repastService.getShopInfoByPrimaryKey(ShopId).getName());
-            dataMap.put("Shop",repastService.getShopInfoByPrimaryKey(ShopId));
-            return success(repastService.getShopInfoByPrimaryKey(ShopId));
-        }
-        return failed();
-    }
 
     /**
      * @Author 闫增健

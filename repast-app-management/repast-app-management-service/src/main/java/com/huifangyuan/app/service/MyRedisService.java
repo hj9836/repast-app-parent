@@ -1,5 +1,6 @@
 package com.huifangyuan.app.service;
 
+import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.mapper.ProductCatMapper;
 import com.huifangyuan.app.mapper.ProductInfoMapper;
@@ -134,12 +135,12 @@ public class MyRedisService {
 
             }catch (Exception e){
                 e.printStackTrace();
-                return null;
+
             }
 
 
         }
-        //如果list长度为空，则返回msg：没有相关商品！
+
         return null;
 
 
@@ -165,25 +166,26 @@ public class MyRedisService {
 
         System.out.println("进入存储方法内");
         //1、首先查询全部的mysql商品信息
-        List<ShopInfoVo> shopInfoVos = null;
+        List<ShopInfoCutom> shopInfoCutoms = null;
         try {
-            shopInfoVos = shopInfoMapper.getAllShopInfo();
-            System.out.println("查看mysql数据长度"+shopInfoVos.size());
+            shopInfoCutoms = shopInfoMapper.getAllShopInfo();
+            System.out.println("查看mysql数据长度"+shopInfoCutoms.size());
         }catch (Exception e){
             e.printStackTrace();
+            return false;
         }
 
 
         //2、如果查询到的mysql商品不为空，则存入redis
-        if (0!=shopInfoVos.size() || null!= shopInfoVos){
+        if (0!=shopInfoCutoms.size() && null!= shopInfoCutoms){
             System.out.println("进入不为空判断方法体内，准备执行for循环");
             //循环存入redis
-            for(int i =0;i<shopInfoVos.size();i++){
+            for(int i =0;i<shopInfoCutoms.size();i++){
                 System.out.println("进入for循环内");
                 //把mysql查询到的实体类转换成JSON
-                String productJSON = JSONUtil.toJsonString(shopInfoVos.get(i));
-                String setStatu = redisService.set(REDIS_PRODUCT_KEY + shopInfoVos.get(i).getShopId(), productJSON);
-                System.out.println("redis中的key值为："+REDIS_PRODUCT_KEY + shopInfoVos.get(i).getShopId());
+                String shopInfoJSON = JSONUtil.toJsonString(shopInfoCutoms.get(i));
+                String setStatu = redisService.set(REDIS_SHOPINFO_KEY +shopInfoCutoms.get(i).getId(), shopInfoJSON);
+                System.out.println("redis中的key值为："+REDIS_SHOPINFO_KEY + shopInfoCutoms.get(i).getId());
                 System.out.println("存入redis是否成功"+setStatu);
 
 
@@ -203,38 +205,31 @@ public class MyRedisService {
 
 
 
-    public List<ShopInfoVo> getShopInfoListByPrimayKeyFromRedis (List<Long> list,RedisService redisService){
-        List<ShopInfoVo> shopInfoVos = null;
-        //首先判断list的长度，如果不为空则查询redis
-        if(0!=list.size() || null!=list){
-            //for循环遍历list数组，用所拿到的Long查询redis中的商品信息
-
-            try {
-                for(int i=0;i<list.size();i++){
-
-                    String product_JSON = redisService.get(REDIS_SHOP_KEY+list.get(i));//PREFIX_PRODUCT为redis中商品数据的KEY值固定前缀，使用静态常量解决硬编码
-                    //然后把字符串类型的JSON数据转换成Product实体类对象
-                    //考虑脏读问题，有可能查询的瞬间商家把该商品删除了，此处要做Redis返回数据的非空判断
-                    if(""!=product_JSON || product_JSON!=null){
-                        // 如果数据不为空，则添加进Product_List中，否则不作任何处理，直接进入下一次循环
-                        ShopInfoVo p = JSONUtil.toObject(product_JSON,ShopInfoVo.class);
-                        shopInfoVos.add(p);
-                    }
-
-                }
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-
-            //for循环结束之后，返回Product_List
-
+    public ShopInfoCutom getShopInfoCutomByPrimayKeyFromRedis (Long shopId,RedisService redisService){
+        try {
+            String s = redisService.get(REDIS_SHOPINFO_KEY + shopId);
+            ShopInfoCutom shopInfoCutom = JSONUtil.toObject(s, ShopInfoCutom.class);
+            if (null!=shopInfoCutom)return shopInfoCutom;
+        }catch (Exception e){
+            e.printStackTrace();
 
         }
-        //如果list长度为空，则返回msg：没有相关商品！
-        return shopInfoVos;
 
-
+        return null;
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

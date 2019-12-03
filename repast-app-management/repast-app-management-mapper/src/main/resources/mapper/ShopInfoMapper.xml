@@ -68,10 +68,10 @@
     where usi.id = #{shopId}
   </select>
 
-    <select id="getAllShopInfo" resultType="com.huifangyuan.app.vo.ShopInfoVo">
-         select usi.id shopId, usi.name, usi.province, usi.city, usi.borough,
-    usi.lng, usi.lat, usi.phone, usf.id facilityId, usf.title, usf.description from ums_shop_information usi
-        inner join ums_shop_facility usf on usi.id = usf.shop_id
+    <select id="getAllShopInfo" resultMap="ShopInfoMap">
+    SELECT i.id,i.`name`,i.province,i.city,i.borough,i.address,i.lng,i.lat,i.closed,i.open_time,i.phone,i.images,i.`status`,i.auth_start_time authStartTime,i.auth_long authLong,f.title,f.description,f.icon
+    from ums_shop_information i
+	LEFT JOIN ums_shop_facility f on i.id = f.shop_id
     </select>
 
    <select id="getShopAllInfoByShopId" parameterType="long" resultType="com.huifangyuan.app.vo.ShopInfoVo">

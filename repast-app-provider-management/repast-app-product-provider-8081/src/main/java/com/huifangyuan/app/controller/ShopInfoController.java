@@ -35,13 +35,7 @@ public class ShopInfoController {
     @Autowired
     private MyRedisService myRedisService;
 
-    @GetMapping("/getShopInfoByPrimaryKey")
-    public ShopInfoVo getShopInfoByPrimaryKey(@RequestParam(value = "ShopId") Long ShopId){
 
-        System.out.println("进入8081");
-        System.out.println(ShopId);
-        return shopInfoService.getShopInfoByPrimaryKey(ShopId,redisService,myRedisService);
-    }
 
     /**
      * 通过店铺 关键字搜素商品列表
@@ -97,7 +91,7 @@ public class ShopInfoController {
 
     @GetMapping ("/getShopAllInfoLAOYANG")
     ShopInfoCutom getShopAllInfoLAOYANG(@RequestParam("shopId") Long ShopId){
-        return shopInfoService.getShopAllInfoLAOYANG(ShopId,redisService);//暂时不用redis，后面优化redis中存入的数据格式
+        return shopInfoService.getShopAllInfoLAOYANG(ShopId,redisService,myRedisService);//暂时不用redis，后面优化redis中存入的数据格式
     }
 }
 
