@@ -16,11 +16,10 @@ public interface ProductCatMapper extends Mapper<ProductCat> {
 
     List<ProductCat> getAllLevelIsZero();
 
-
     List<ProductCat> selectAllProductCat();
 
     List<ProductCat> getCateByLevel();
 
-    List<Long>  selectProductCatByShopId(Long shopId);
+    List<Long> selectProductCatByShopId(Long shopId);
 
 }

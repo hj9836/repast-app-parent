@@ -77,15 +77,16 @@ public class ProductCatService extends BaseService<ProductCat> {
         String s = null;
         try {
             s = redisService.get(REDIS_LEVEL0CAT_KEY);
+            List<ProductCat> productCats = JSONUtil.toList(s, ProductCat.class);
+            if (null!=productCats){
+                return productCats;
+
+            }
         }catch (Exception e){
             e.printStackTrace();
         }
 
-        List<ProductCat> productCats = JSONUtil.toList(s, ProductCat.class);
-        if (null!=productCats){
-            return productCats;
 
-        }
 
 
 
