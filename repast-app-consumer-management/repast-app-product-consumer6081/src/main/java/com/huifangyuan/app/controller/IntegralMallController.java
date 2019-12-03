@@ -33,12 +33,16 @@ public class IntegralMallController extends BaseController {
      */
     @ApiOperation(value = "积分商城",notes = "查询支持用积分兑换的商品信息")
     @GetMapping("/getProductInfoByIntegral")
-    public ResultData getProductInfoByIntegral(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize){
-        List<MemberProduct> proInfo = iRepastService.getProductInfoByIntegral(pageNum,pageSize);
-        if (null != proInfo){
-            return success(proInfo);
-        }else{
-            return failed();
+    public ResultData getProductInfoByIntegral(@RequestParam("pageNum") Integer pageNum, @RequestParam("pageSize") Integer pageSize,String token) {
+        if (null != token) {
+            String s = iRepastService.selectToken(token);
+            if (null != s) {
+                List<MemberProduct> proInfo = iRepastService.getProductInfoByIntegral(pageNum, pageSize);
+                if (null != proInfo) {
+                    return success(proInfo);
+                }
+            }
         }
+        return failed();
     }
 }

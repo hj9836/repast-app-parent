@@ -20,7 +20,7 @@ import java.util.List;
  *      商家controller
  **/
 @RestController
-@Api(value = "分类信息", tags = "商品/商家 分类信息接口")
+@Api(value = "分类信息", tags = "商品分类信息接口")
 public class ProductCateController extends BaseController {
 
     @Autowired
@@ -32,18 +32,17 @@ public class ProductCateController extends BaseController {
      * @return
      */
     @GetMapping("/getByLevel")
-    @ApiOperation(value = "商品类型",notes = "通过层级查询商品类型")
-    public ResultData getCateByLevel(){
-        List<ProductCat> ProductCate = repastService.getCateByLevel();
-        if (null != ProductCate){
-            return success(ProductCate);
-        }else {
-            return failed();
+    @ApiOperation(value = "商品类型", notes = "通过层级查询商品类型")
+    public ResultData getCateByLevel(String token) {
+        if(null != token) {
+            String s = repastService.selectToken(token);
+            if (null != s) {
+                List<ProductCat> ProductCate = repastService.getCateByLevel();
+                if (null != ProductCate) {
+                    return success(ProductCate);
+                }
+            }
         }
+        return failed();
     }
-
-
-
-
-
 }
