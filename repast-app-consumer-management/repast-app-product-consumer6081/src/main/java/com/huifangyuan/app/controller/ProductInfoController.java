@@ -5,6 +5,7 @@ import com.huifangyuan.app.base.ResultData;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
+import com.huifangyuan.app.vo.CommentVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -13,7 +14,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -126,7 +126,7 @@ public class ProductInfoController extends BaseController {
     /**
      * 根据商品的ID查询当前商品信息
      * <>杨欣宜</>
-     * @param shopId
+     * @param
      * @return
      */
     @GetMapping("/getProductInfoByPrimaryKey")
@@ -139,7 +139,27 @@ public class ProductInfoController extends BaseController {
         return failed();
     }
 
+    /**
+     * 通过产品id查询产品评价
+     * @param
+     * @return
+     */
+    @GetMapping("/getProductCommentById")
+    @ApiOperation(value = "查询产品评价" , notes = "通过主键查询产品全部评价" )
+    public ResultData getProductCommentById(Long productId , String token){
 
+        if (null != token){
+            String s = repastService.selectToken(token);
+            if (null != s){
+                List<CommentVo> productCommentById = repastService.getProductCommentById(productId);
+                if (null != productCommentById){
+                    return success(productCommentById);
+                }
+            }
+        }
+        return failed();
+
+    }
 
 
 

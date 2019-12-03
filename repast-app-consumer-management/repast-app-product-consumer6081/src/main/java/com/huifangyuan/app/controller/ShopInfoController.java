@@ -3,12 +3,10 @@ package com.huifangyuan.app.controller;
 import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
 import com.huifangyuan.app.cutom.ShopInfoCutom;
-import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
-import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
+import com.huifangyuan.app.vo.CommentVo;
 import com.huifangyuan.app.vo.ProductVo;
-import com.huifangyuan.app.vo.ShopInfoVo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -93,7 +91,7 @@ public class ShopInfoController extends BaseController {
         if (null != token){
             String s = repastService.selectToken(token);
             if (null != s){
-                List<Comment> shopCommentById = repastService.getShopCommentById(shopId);
+                List<CommentVo> shopCommentById = repastService.getShopCommentById(shopId);
                 if (null != shopCommentById){
                     return success(shopCommentById);
                 }

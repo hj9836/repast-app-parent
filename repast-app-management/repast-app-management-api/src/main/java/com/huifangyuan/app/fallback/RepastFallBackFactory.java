@@ -2,15 +2,12 @@ package com.huifangyuan.app.fallback;
 
 
 import com.huifangyuan.app.cutom.ShopInfoCutom;
-import com.huifangyuan.app.domain.Comment;
-import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.IRepastService;
 import com.huifangyuan.app.vo.*;
 import feign.hystrix.FallbackFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -93,8 +90,14 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
             }
 
             @Override
-            public List<Comment> getShopCommentById(Long shopId) {
+            public List<CommentVo> getShopCommentById(Long shopId) {
                 System.out.println("根据店铺id获取店铺所有评价，熔断数据");
+                return null;
+            }
+
+            @Override
+            public List<CommentVo> getProductCommentById(Long productId) {
+                System.out.println("根据产品id获取产品所有评价，熔断数据");
                 return null;
             }
 

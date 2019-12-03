@@ -1,11 +1,10 @@
 package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.cutom.ShopInfoCutom;
-import com.huifangyuan.app.domain.Comment;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
 import com.huifangyuan.app.service.*;
-import com.huifangyuan.app.vo.AdvertiseVo;
+import com.huifangyuan.app.vo.CommentVo;
 import com.huifangyuan.app.vo.ProductVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,10 +34,6 @@ public class ShopInfoController {
 
     @Autowired
     private MyRedisService myRedisService;
-
-    @Autowired
-    private ShopInfoMapper shopInfoMapper;
-
 
     @GetMapping("/getShopInfoByPrimaryKey")
     public ShopInfoVo getShopInfoByPrimaryKey(@RequestParam(value = "ShopId") Long ShopId){
@@ -72,12 +67,12 @@ public class ShopInfoController {
      * @return
      */
     @GetMapping("/getShopCommentById")
-    public List<Comment> getShopCommentById(@RequestParam("shopId") Long shopId){
-        Comment comment = new Comment().setShopId(shopId);
+    public List<CommentVo> getShopCommentById(@RequestParam("shopId") Long shopId){
+        CommentVo commentVo = new CommentVo().setShopId(shopId);
         try {
-            List<Comment> comments = shopCommentService.selectDomain(comment);
-            if (comments.size() > 0){
-                    return comments;
+            List<CommentVo> shopCommentById = shopCommentService.getShopCommentById(shopId);
+            if (shopCommentById.size() > 0){
+                    return shopCommentById;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +85,7 @@ public class ShopInfoController {
     /**
      * @description
      *      通过店铺主键查询商品列表
-     * @param [shopId]
+     * @param
      * @date 2019/11/21
      * @return java.util.List<com.aaa.lee.app.domain.Product>
      * @throws

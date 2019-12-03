@@ -3,8 +3,8 @@ package com.huifangyuan.app.controller;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.service.*;
+import com.huifangyuan.app.vo.CommentVo;
 import com.huifangyuan.app.vo.MemberProduct;
-import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,12 +25,13 @@ public class ProductInfoController {
     private ProductInfoService productInfoService;
     @Autowired
     private ProductCatService productCatService;
-
     @Autowired
     private RedisService redisService;
-
     @Autowired
     private MyRedisService myRedisService;
+    @Autowired
+    private ShopCommentService shopCommentService;
+
 
     /**
      *@ClassName ProductController
@@ -126,7 +127,7 @@ public class ProductInfoController {
     /**
      * 根据商铺的ID查询当前店铺所推荐的商品部分信息
      * <>霍晨亮</>
-     * @param shopId
+     * @param
      * @return
      */
     @GetMapping("/getProductInfoByPrimaryKey")
@@ -134,5 +135,21 @@ public class ProductInfoController {
 
         return productInfoService.getProductInfoByPrimaryKey(productId,redisService,myRedisService);
     }
+
+    /**
+     * 通过产品id查询产品评价
+     * @param
+     * @return
+     */
+
+    @GetMapping("/getProductCommentById")
+    public List<CommentVo> getProductCommentById(@RequestParam("productId") Long productId){
+        List<CommentVo> productCommentById = shopCommentService.getProductCommentById(productId);
+        if (null != productCommentById){
+            return productCommentById;
+        }
+        return null;
+    };
+
 
 }

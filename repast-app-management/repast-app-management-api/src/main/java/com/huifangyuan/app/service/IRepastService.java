@@ -2,8 +2,6 @@ package com.huifangyuan.app.service;
 
 
 import com.huifangyuan.app.cutom.ShopInfoCutom;
-import com.huifangyuan.app.domain.Comment;
-import com.huifangyuan.app.domain.IntegralMall;
 import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.domain.ProductCat;
 import com.huifangyuan.app.fallback.RepastFallBackFactory;
@@ -57,7 +55,7 @@ public interface IRepastService {
      *
      * @description
      *      通过店铺主键查询商品类目列表
-     * @param [shopId]
+     * @param
      * @date 2019/11/21
      * @return com.aaa.lee.app.base.ResultData
      * @throws
@@ -69,7 +67,7 @@ public interface IRepastService {
      *
      * @description
      *      通过店铺主键查询商品列表
-     * @param [shopId]
+     * @param
      * @date 2019/11/21
      * @return java.util.List<com.aaa.lee.app.domain.Product>
      * @throws
@@ -131,8 +129,15 @@ public interface IRepastService {
      * @return
      */
     @GetMapping("/getShopCommentById")
-    List<Comment> getShopCommentById(@RequestParam("shopId") Long shopId);
+    List<CommentVo> getShopCommentById(@RequestParam("shopId") Long shopId);
 
+    /**
+     * 通过产品id查询产品评价
+     * @param
+     * @return
+     */
+    @GetMapping("/getProductCommentById")
+    List<CommentVo> getProductCommentById(@RequestParam("productId") Long productId);
     /**
      * 根据商品name或keywords或product_category_name进行对全部商品的模糊搜索
      * @param keywords
