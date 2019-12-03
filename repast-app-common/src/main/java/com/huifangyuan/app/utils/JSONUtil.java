@@ -1,5 +1,6 @@
 package com.huifangyuan.app.utils;
 
+import com.alibaba.fastjson.JSONObject;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -79,8 +80,21 @@ public class JSONUtil {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+
         return null;
     }
+
+    public static <T> T toObjectLAOYANG(String jsonData, Class<T> beanType) {
+        try {
+            T t = JSONObject.parseObject(jsonData, beanType);
+            return t;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 
 
 

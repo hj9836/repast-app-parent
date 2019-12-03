@@ -2,6 +2,7 @@ package com.huifangyuan.app.service;
 
 import com.huifangyuan.app.cutom.ShopInfoCutom;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
+import com.huifangyuan.app.utils.JSONUtil;
 import com.huifangyuan.app.vo.AdvertiseVo;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+
+import static com.huifangyuan.app.staticstatus.StaticProperties.*;
 
 
 @Service
@@ -57,8 +61,23 @@ public class ShopInfoService {
         return shopInfoMapper.getAdvertise();
     }
 
-    public ShopInfoCutom getShopAllInfoLAOYANG(Long shopId){
+    public ShopInfoCutom getShopAllInfoLAOYANG(Long shopId,RedisService redisService){
+        //先从redis中读取：
+        try {
+            String s = redisService.get(REDIS_SHOP_KEY + shopId);
+            ShopInfoCutom shopInfoCutom = JSONUtil.toObject(s, ShopInfoCutom.class);
+            if (null!=shopInfoCutom)return shopInfoCutom;
+        }catch (Exception e){
+            e.printStackTrace();
+
+        }
+
+
         return shopInfoMapper.getShopAllInfoLAOYANG(shopId);
+
+
+
+
     }
 
 

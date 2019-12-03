@@ -102,7 +102,7 @@ public class ShopInfoController {
 
     @GetMapping ("/getShopAllInfoLAOYANG")
     ShopInfoCutom getShopAllInfoLAOYANG(@RequestParam("shopId") Long ShopId){
-        return shopInfoService.getShopAllInfoLAOYANG(ShopId);//暂时不用redis，后面优化redis中存入的数据格式
+        return shopInfoService.getShopAllInfoLAOYANG(ShopId,redisService);//暂时不用redis，后面优化redis中存入的数据格式
     }
 }
 
