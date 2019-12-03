@@ -116,13 +116,18 @@ public class ShopInfoController extends BaseController {
      **/
     @GetMapping("/getProductByShopId")
     @ApiOperation(value = "商品信息", notes = "通过店铺主键查询商品列表")
-    public ResultData getProductByShopId(Long shopId) {
-        List<Product> productList = repastService.getProductByShopId(shopId);
-        if(null != productList) {
-            return success(productList);
-        } else {
-            return failed();
+    public ResultData getProductByShopId(Long shopId,String token) {
+        if(null != token){
+            String s = repastService.selectToken(token);
+            if(null !=s){
+                List<Product> productList = repastService.getProductByShopId(shopId);
+                if(null != productList) {
+                    return success(productList);
+                }
+            }
         }
+        return failed();
+
     }
 
 
