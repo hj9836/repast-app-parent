@@ -2,6 +2,7 @@ package com.huifangyuan.app.controller;
 
 import com.huifangyuan.app.base.BaseController;
 import com.huifangyuan.app.base.ResultData;
+import com.huifangyuan.app.domain.Product;
 import com.huifangyuan.app.service.IRepastService;
 import com.huifangyuan.app.vo.CategoryShop;
 import io.swagger.annotations.Api;
@@ -35,10 +36,15 @@ public class CategoryShopController extends BaseController {
      */
     @GetMapping("/getCategoryShop")
     @ApiOperation(value = "商品类目", notes = "通过类目名称查询店铺列表")
-    public ResultData getCategoryShop(@RequestParam("parentId") Long parentId) {
-        List<CategoryShop> shops = repastService.getCategoryShop(parentId);
-        if (null != shops){
-            return success("查询成功",shops);
+    public ResultData getCategoryShop(@RequestParam("parentId") Long parentId,String token) {
+        if(null != token) {
+            String s = repastService.selectToken(token);
+            if (null != s) {
+                List<CategoryShop> shops = repastService.getCategoryShop(parentId);
+                if (null != shops){
+                    return success("查询成功",shops);
+                }
+            }
         }
         return failed();
     }

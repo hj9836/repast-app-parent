@@ -62,11 +62,8 @@ public class ShopInfoController extends BaseController {
                 List<Product> products = repastService.selectShopProduct(productVo);
                 if (null != products) {
                     return success("搜索成功", products);
-                } else {
-                    return failed();
                 }
             }
-            return failed();
         }
         return failed();
     }
