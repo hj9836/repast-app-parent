@@ -121,15 +121,15 @@
 
     <select id="getProductListByPrimaryKeyList" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
 
-        SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price memberPrice from pms_product p LEFT JOIN pms_member_price m on p.id = m.product_id
+        SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,m.member_price,p.shop_id shopId memberPrice from pms_product p LEFT JOIN pms_member_price m on p.id = m.product_id
         <foreach collection="list" item="id" open="where p.id in(" close=")" separator=",">
             #{id}
         </foreach>
 
     </select>
 
-    <select id="getProduc   tInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
-    SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,p.description,m.member_price memberPrice from pms_product p
+    <select id="getProductInfoByPrimaryKey" parameterType="java.lang.Long" resultType="com.huifangyuan.app.vo.MemberProduct">
+    SELECT p.name,p.id productId,p.price price,p.promotion_price promotionPrice,p.promotion_type promotionType,p.description,m.member_price memberPrice,p.shop_id shopId from pms_product p
     LEFT JOIN pms_member_price m ON p.id=m.product_id where p.delete_status = 0 and p.publish_status = 1 and p.id=#{productId}
     </select>
 

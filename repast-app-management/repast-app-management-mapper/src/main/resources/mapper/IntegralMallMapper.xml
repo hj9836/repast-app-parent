@@ -46,7 +46,7 @@
         <result column="detail_mobile_html" property="detailMobileHtml" jdbcType="LONGVARCHAR" />
     </resultMap>
     <select id="getProductInfoByIntegral" parameterType="java.lang.Integer" resultType="com.huifangyuan.app.vo.MemberProduct">
-SELECT p.name , p.pic , p.price , p.promotion_price promotionPrice , p.promotion_type promotionType
+SELECT p.name , p.pic , p.price , p.promotion_price promotionPrice , p.promotion_type promotionType,p.id productId,p.shop_id shopId,p.description,p.stock,p.sale
 from pms_product p where p.currency = 1 and p.delete_status = 0 and p.publish_status=1 LIMIT ${startNum},${pageSize}
   </select>
     <select id="getProductIdByIntegral" parameterType="java.lang.Integer" resultType="com.huifangyuan.app.vo.MemberProduct">
