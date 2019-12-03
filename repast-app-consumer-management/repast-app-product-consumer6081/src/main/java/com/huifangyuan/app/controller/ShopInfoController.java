@@ -54,7 +54,7 @@ public class ShopInfoController extends BaseController {
      * @return
      */
     @PostMapping("/selectShopProduct")
-    @ApiOperation(value = "商品信息", notes = "通过店铺搜素查询商品列表")
+    @ApiOperation(value = "搜索功能", notes = "通过店铺搜素查询商品列表")
     public ResultData selectShopProduct(ProductVo productVo,String token){
         if(null != token) {
             String s = repastService.selectToken(token);
