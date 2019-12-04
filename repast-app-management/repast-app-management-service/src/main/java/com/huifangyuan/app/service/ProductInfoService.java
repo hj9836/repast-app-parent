@@ -190,10 +190,18 @@ public class ProductInfoService extends BaseService<Product> {
 
     }
 
-    public List<CanTeenDateVo> getCanteenDateByShopId(Long ShopId){
+    public List<CanTeenDateVo> getCanteenDateByShopId(Long shopId,RedisService redisService,MyRedisService myRedisService){
 
-        return productInfoMapper.getCanteenDateByShopId(ShopId);
+        //首先进入redis中查询
+        List<CanTeenDateVo>  shopMenuAndProductByShopIdToRedis = myRedisService.getShopMenuAndProductByShopIdToRedis(shopId, redisService);
+        if (null!=shopMenuAndProductByShopIdToRedis){
+            return shopMenuAndProductByShopIdToRedis;
+        }
+
+
+        return productInfoMapper.getCanteenDateByShopId(shopId);
     }
+
 
 
 

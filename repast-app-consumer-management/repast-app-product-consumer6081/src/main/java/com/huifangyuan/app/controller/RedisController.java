@@ -153,6 +153,29 @@ public class RedisController extends BaseController {
         return failed();
     }
 
+    @GetMapping("/insertAllShopMenuAndProductToRedis")
+    @ApiOperation(value = "向redis中插入全部店铺的菜单及其商品信息",notes = "向redis中插入全部店铺的菜单及其商品信息，key值为店铺id，格式为CanTeenDateVo")
+    public ResultData insertAllShopMenuAndProductToRedis(@RequestParam("shopId") Long ShopId) {
+        if (true == repastService.insertAllShopMenuAndProductToRedis()) {
+
+            return success("插入成功");
+        }
+        return failed();
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }

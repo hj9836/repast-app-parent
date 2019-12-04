@@ -111,7 +111,12 @@ public class RedisController {
 
     @GetMapping ("/getCanteenDateByShopId")
     List<CanTeenDateVo> getCanteenDateByShopId(@RequestParam("shopId") Long ShopId){
-        return productInfoService.getCanteenDateByShopId(ShopId);//想好，如果使用一对多嵌套的实体类Vo，这样就没办法进redis查询了
+        return productInfoService.getCanteenDateByShopId(ShopId,redisService,myRedisService);//想好，如果使用一对多嵌套的实体类Vo，这样就没办法进redis查询了
+    }
+
+    @GetMapping ("/insertAllShopMenuAndProductToRedis")
+    boolean insertAllShopMenuAndProductToRedis(){
+        return myRedisService.insertAllShopMenuAndProductToRedis(redisService);
     }
 
 }

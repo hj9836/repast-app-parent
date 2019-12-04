@@ -16,6 +16,7 @@ import java.util.List;
 public class CanTeenDateVo implements Serializable {
     private Long catId;
     private String catName;
+    private Long shopId;
     private List<MemberProduct> data;
 
 

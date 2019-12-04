@@ -241,6 +241,8 @@ public interface IRepastService {
     @GetMapping ("/getShopAllInfoLAOYANG")
     ShopInfoCutom getShopAllInfoLAOYANG(@RequestParam("shopId") Long ShopId);
 
+    @GetMapping ("/insertAllShopMenuAndProductToRedis")
+    boolean insertAllShopMenuAndProductToRedis();
 
 
     /*---------------------------------------------老杨redis-------------------------------------------------------------*/

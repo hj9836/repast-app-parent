@@ -30,7 +30,6 @@
   </select>
 
   <select id="getAllLevelIsZero" resultMap="BaseResultMap">
-
 	SELECT distinct pc.parent_id,pc.`name`,pc.show_status,pc.sort from pms_product_category pc WHERE `level`=0  LIMIT 0,8
   </select>
 

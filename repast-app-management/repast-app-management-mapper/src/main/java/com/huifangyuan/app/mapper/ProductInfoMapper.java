@@ -76,4 +76,6 @@ public interface ProductInfoMapper extends Mapper<Product> {
 
     List<CanTeenDateVo> getCanteenDateByShopId(Long shopId);
 
+    List<CanTeenDateVo> selectAllShopMenuAndProductToRedis();
+
 }

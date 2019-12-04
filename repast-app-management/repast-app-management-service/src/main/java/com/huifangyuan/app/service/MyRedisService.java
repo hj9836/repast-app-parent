@@ -6,6 +6,7 @@ import com.huifangyuan.app.mapper.ProductCatMapper;
 import com.huifangyuan.app.mapper.ProductInfoMapper;
 import com.huifangyuan.app.mapper.ShopInfoMapper;
 import com.huifangyuan.app.utils.JSONUtil;
+import com.huifangyuan.app.vo.CanTeenDateVo;
 import com.huifangyuan.app.vo.MemberProduct;
 import com.huifangyuan.app.vo.ShopInfoVo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -219,6 +220,71 @@ public class MyRedisService {
     }
 
 
+    public boolean insertAllShopMenuAndProductToRedis(RedisService redisService){
+        System.out.println("进入存储方法内");
+        //1、首先查询全部的商品类目信息
+        List<CanTeenDateVo> canTeenDateVos = null;
+        int size = 0;
+        try {
+
+            canTeenDateVos = productInfoMapper.selectAllShopMenuAndProductToRedis();
+            System.out.println("看一下第一条数据的店铺id"+canTeenDateVos.get(0).getShopId());
+            size = canTeenDateVos.size();//这步可能出现空指针异常，故trycatch
+            System.out.println("查看mysql数据长度"+size);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+
+
+
+        //2、如果查询到的mysql商品不为空，则存入redis
+        if (0!=size || null!= canTeenDateVos){
+            System.out.println("进入不为空判断方法体内，准备执行for循环");
+            ArrayList<CanTeenDateVo> nowCanTeenDateVos = new ArrayList<CanTeenDateVo>();
+
+
+            //循环存入redis
+            Long shopId = 0l;
+            String setstatus = "";
+
+            for(int i =0;i<size;i++){
+                System.out.println("进入for循环内");
+                /* ————————————————————————————————————————新增逻辑————————————————————————————————————-*/
+                Long nowShopId = canTeenDateVos.get(i).getShopId();
+                if (i==0)shopId=nowShopId;//第一次插入时的判断
+
+                if (nowShopId==shopId){
+                    nowCanTeenDateVos.add(canTeenDateVos.get(i));//放入容器中
+                    if (i==size-1){//最后一条插入时的判断：
+                        //然后存入redis
+                        System.out.println("最后一次插入："+nowCanTeenDateVos);
+                        String s = JSONUtil.toJsonString(nowCanTeenDateVos);
+                        setstatus = redisService.set(REDIS_SHOPMENUANDPRODUCT_KEY + shopId, s);
+                        System.out.println("redis中的key值为："+REDIS_SHOPMENUANDPRODUCT_KEY + shopId);
+                        System.out.println("存入redis是否成功"+setstatus);
+                        //存入完毕
+                    }
+
+                }else {//如果不等于上一条数据的shopId，则新创建容器List，！！并且，把上一个List容器的信息存入redis!!
+
+                    //然后存入redis
+                    System.out.println("非最后一次的插入"+nowCanTeenDateVos);
+                    String s = JSONUtil.toJsonString(nowCanTeenDateVos);
+                    setstatus = redisService.set(REDIS_SHOPMENU_KEY + shopId, s);
+                    System.out.println("redis中的key值为："+REDIS_SHOPMENU_KEY + shopId);
+                    System.out.println("存入redis是否成功"+setstatus);
+                    //存入完毕
+                    shopId = nowShopId;//覆盖shopId
+                    nowCanTeenDateVos = new ArrayList<CanTeenDateVo>();//覆盖新的List容器
+                    nowCanTeenDateVos.add(canTeenDateVos.get(i));//放入容器中
+
+                }
+                shopId = canTeenDateVos.get(i).getShopId();//获取当前准备插入redis中条数的shopId
+
+
+
+                /* ————————————————————————————————————————新增逻辑————————————————————————————————————-*/
 
 
 
@@ -230,7 +296,47 @@ public class MyRedisService {
 
 
 
+            }
+            return true;
+        }
+        return false;
+    }
 
+
+
+
+    public List<CanTeenDateVo> getShopMenuAndProductByShopIdToRedis (Long shopId, RedisService redisService){
+        String menuAndProduct_JSON = null;
+
+        //首先判断list的长度，如果不为空则查询redis
+        if(0!=shopId || null!=shopId){
+            try {
+
+
+                menuAndProduct_JSON = redisService.get(REDIS_SHOPMENUANDPRODUCT_KEY+shopId);//PREFIX_PRODUCT为redis中商品数据的KEY值固定前缀，使用静态常量解决硬编码
+
+
+                //然后把字符串类型的JSON数据转换成Product实体类对象
+                //考虑脏读问题，有可能查询的瞬间商家把该商品删除了，此处要做Redis返回数据的非空判断
+                if(""!=menuAndProduct_JSON || menuAndProduct_JSON!=null){
+                    // 如果数据不为空，则添加进Product_List中，否则不作任何处理，直接进入下一次循环
+                    List<CanTeenDateVo>  p = JSONUtil.toList(menuAndProduct_JSON, CanTeenDateVo.class);
+                    return p;
+                }
+
+
+            }catch (Exception e){
+                e.printStackTrace();
+
+            }
+
+
+        }
+
+        return null;
+
+
+    }
 
 
 }

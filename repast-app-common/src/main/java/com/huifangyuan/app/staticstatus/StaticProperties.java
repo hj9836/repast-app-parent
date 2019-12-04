@@ -14,6 +14,8 @@ public class StaticProperties {
     public static final String REDIS_SHOPMENU_KEY="shopmenu";
     public static final String REDIS_LEVEL0CAT_KEY="ZeroCat";
     public static final String REDIS_SHOPINFO_KEY="shopInfo";
+    public static final String REDIS_SHOPMENUANDPRODUCT_KEY="shopMenuAndProduct";
+
 
 
 }

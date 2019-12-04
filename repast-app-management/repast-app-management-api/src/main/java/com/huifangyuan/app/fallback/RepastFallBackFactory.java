@@ -224,9 +224,17 @@ public class RepastFallBackFactory implements FallbackFactory<IRepastService> {
 
             @Override
             public ShopInfoCutom getShopAllInfoLAOYANG(Long ShopId) {
-                System.out.println("进入"+"全组最屌的店家信息+小图标"+"熔断方法");
+                System.out.println("进入"+"店家信息+小图标"+"熔断方法");
                 return null;
             }
+
+            @Override
+            public boolean insertAllShopMenuAndProductToRedis() {
+                System.out.println("进入"+"向redis中插入全部商家的菜单和商品信息"+"熔断方法");
+                return false;
+            }
+
+
         };
         return repastService;
     }
