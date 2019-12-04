@@ -49,7 +49,7 @@ public class MyRedisService {
 
 
         //2、如果查询到的mysql商品不为空，则存入redis
-        if (0!=products_list_mysql.size() || null!= products_list_mysql){
+        if (0!=products_list_mysql.size() && null!= products_list_mysql){
             System.out.println("进入不为空判断方法体内，准备执行for循环");
             //循环存入redis
             for(int i =0;i<products_list_mysql.size();i++){
@@ -337,6 +337,44 @@ public class MyRedisService {
 
 
     }
+
+
+    public boolean coverShopMenuAndProductByShopIdInRedis(Long shopId,RedisService redisService){
+        //首先进行单查询，从mysql中查询该店铺的Canteen数据
+        List<CanTeenDateVo> canteenDateByShopId = productInfoMapper.getCanteenDateByShopId(shopId);
+        String s = JSONUtil.toJsonString(canteenDateByShopId);
+        //然后覆盖旧数据
+        String setstatus = redisService.set(REDIS_SHOPMENUANDPRODUCT_KEY + shopId, s);
+        if ("OK".equals(setstatus.toUpperCase()))return true;
+
+
+        return false;
+    }
+
+    public boolean coverShopInfoByShopIdInRedis(Long shopId,RedisService redisService){
+        //首先进行单查询，从mysql中查询该店铺的Canteen数据
+        ShopInfoCutom shopAllInfoLAOYANG = shopInfoMapper.getShopAllInfoLAOYANG(shopId);
+        String s = JSONUtil.toJsonString(shopAllInfoLAOYANG);
+        //然后覆盖旧数据
+        String setstatus = redisService.set(REDIS_SHOPINFO_KEY + shopId, s);
+        if ("OK".equals(setstatus.toUpperCase()))return true;
+
+
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 }
